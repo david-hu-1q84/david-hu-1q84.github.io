@@ -85,21 +85,21 @@
 
 
 <meta name="description" content="Ubuntu16.04 安装 Vmware-tools
-建议安装 Ubuntu 自带的开源vmware-tools    sudo apt install open-vmware-tools-desktop
-Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    sudo add-apt-repository ppa:webupd8team/s">
+建议安装 Ubuntu 自带的开源vmware-tools    $ sudo apt install open-vmware-tools-desktop
+Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    $ sudo add-apt-repository ppa:webupd8te">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VMWare12-Ubuntu16.04学习">
 <meta property="og:url" content="http://cycygogo.cn/2017/03/16/VMWare12-Ubuntu16-04/index.html">
 <meta property="og:site_name" content="Lucy's Hugo!">
 <meta property="og:description" content="Ubuntu16.04 安装 Vmware-tools
-建议安装 Ubuntu 自带的开源vmware-tools    sudo apt install open-vmware-tools-desktop
-Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    sudo add-apt-repository ppa:webupd8team/s">
-<meta property="og:updated_time" content="2018-01-31T06:43:02.553Z">
+建议安装 Ubuntu 自带的开源vmware-tools    $ sudo apt install open-vmware-tools-desktop
+Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    $ sudo add-apt-repository ppa:webupd8te">
+<meta property="og:updated_time" content="2018-07-04T15:31:52.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VMWare12-Ubuntu16.04学习">
 <meta name="twitter:description" content="Ubuntu16.04 安装 Vmware-tools
-建议安装 Ubuntu 自带的开源vmware-tools    sudo apt install open-vmware-tools-desktop
-Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    sudo add-apt-repository ppa:webupd8team/s">
+建议安装 Ubuntu 自带的开源vmware-tools    $ sudo apt install open-vmware-tools-desktop
+Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    $ sudo add-apt-repository ppa:webupd8te">
 
 
 
@@ -330,18 +330,25 @@ Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    sud
 
       
         <h4 id="Ubuntu16-04-安装-Vmware-tools"><a href="#Ubuntu16-04-安装-Vmware-tools" class="headerlink" title="Ubuntu16.04 安装 Vmware-tools"></a>Ubuntu16.04 安装 Vmware-tools</h4><blockquote>
-<p>建议安装 Ubuntu 自带的开源vmware-tools<br>    <code>sudo apt install open-vmware-tools-desktop</code></p>
-<h4 id="Ubuntu16-04-安装-sublime-text3"><a href="#Ubuntu16-04-安装-sublime-text3" class="headerlink" title="Ubuntu16.04 安装 sublime-text3"></a>Ubuntu16.04 安装 sublime-text3</h4><p>第一步：添加sublime text 3的仓库<br>    <code>sudo add-apt-repository ppa:webupd8team/sublime-text-3</code><br>    按ENTER继续，建立信任数据库<br>第二步：更新软件库<br>    <code>sudo apt update</code><br>第三步：安装Sublime Text 3<br>    <code>sudo apt install sublime-text-installer</code><br>下面是sublime text 2的安装命令，与3稍有不同：<br>    <code>sudo add-apt-repository ppa:webupd8team/sublime-text-2</code><br>    <code>sudo apt-get update</code><br>    <code>sudo apt-get install sublime-text-dev</code> </p>
+<p>建议安装 Ubuntu 自带的开源vmware-tools<br>    <code>$ sudo apt install open-vmware-tools-desktop</code></p>
+<h4 id="Ubuntu16-04-安装-sublime-text3"><a href="#Ubuntu16-04-安装-sublime-text3" class="headerlink" title="Ubuntu16.04 安装 sublime-text3"></a>Ubuntu16.04 安装 sublime-text3</h4><p>第一步：添加sublime text 3的仓库<br>    <code>$ sudo add-apt-repository ppa:webupd8team/sublime-text-3</code><br>    按ENTER继续，建立信任数据库<br>第二步：更新软件库<br>    <code>$ sudo apt update</code><br>第三步：安装Sublime Text 3<br>    <code>$ sudo apt install sublime-text-installer</code><br>下面是sublime text 2的安装命令，与3稍有不同：<br>    <code>$ sudo add-apt-repository ppa:webupd8team/sublime-text-2</code><br>    <code>$ sudo apt-get update</code><br>    <code>$ sudo apt-get install sublime-text-dev</code> </p>
 </blockquote>
 <a id="more"></a>
 <h4 id="Ubuntu16-04-安装-fcitx中文输入法"><a href="#Ubuntu16-04-安装-fcitx中文输入法" class="headerlink" title="Ubuntu16.04 安装 fcitx中文输入法"></a>Ubuntu16.04 安装 fcitx中文输入法</h4><blockquote>
-<p>安装fcitx的包：<br>    <code>sudo apt install fcitx-table</code></p>
+<p>安装fcitx的包：<br>    <code>$ sudo apt install fcitx-table</code></p>
 </blockquote>
 <h4 id="查看Linux版本信息"><a href="#查看Linux版本信息" class="headerlink" title="查看Linux版本信息"></a>查看Linux版本信息</h4><blockquote>
-<p><code># uname －a</code>   （Linux查看版本当前操作系统内核信息）<br><code># cat /proc/version</code> （Linux查看当前操作系统版本信息）<br><code># cat /etc/issue</code>  或 <code>cat /etc/redhat-release</code>（Linux查看版本当前操作系统发行版信息）<br><code># cat /proc/cpuinfo</code>（Linux查看cpu相关信息，包括型号、主频、内核信息等）<br><code># getconf LONG_BIT</code>  （Linux查看版本说明当前CPU运行在32bit模式下， 但不代表CPU不支持64bit）<br><code># lsb_release -a</code></p>
+<p><code>$ uname －a</code>   （Linux查看版本当前操作系统内核信息）<br><code>$ cat /proc/version</code> （Linux查看当前操作系统版本信息）<br><code>$ cat /etc/issue</code>  或 <code>cat /etc/redhat-release</code>（Linux查看版本当前操作系统发行版信息）<br><code>$ cat /proc/cpuinfo</code>（Linux查看cpu相关信息，包括型号、主频、内核信息等）<br><code>$ getconf LONG_BIT</code>  （Linux查看版本说明当前CPU运行在32bit模式下， 但不代表CPU不支持64bit）<br><code>$ lsb_release -a</code> </p>
 </blockquote>
-<h4 id="查看LInux端口信息"><a href="#查看LInux端口信息" class="headerlink" title="查看LInux端口信息"></a>查看LInux端口信息</h4><blockquote>
-<p><code>netstat -tuln</code> 查看现在的网络端口监听<br><code>ps -ef</code> 查看当前的进程<br><code>cat postgresql.conf | grep listen</code> 查看监听地址是否正确</p>
+<h4 id="查看Linux端口信息"><a href="#查看Linux端口信息" class="headerlink" title="查看Linux端口信息"></a>查看Linux端口信息</h4><blockquote>
+<p><code>$ netstat -tuln</code> 查看现在的网络端口监听<br><code>$ ps -ef</code> 查看当前的进程<br><code>$ cat postgresql.conf | grep listen</code> 查看监听地址是否正确</p>
+</blockquote>
+<h4 id="强大的apt-get命令"><a href="#强大的apt-get命令" class="headerlink" title="强大的apt-get命令"></a>强大的apt-get命令</h4><blockquote>
+<p>1.更新源，升级软件和系统之前要先干这个～ （源目录：/etc/apt/sources.list）<br>    <code>sudo apt-get update</code><br>2.更新已安装的包到最新版本（若已经最新则忽略）<br>    <code>sudo apt-get upgrade</code><br>3.升级系统，有一定风险！此时 apt 将首先升级重要的包，如果有冲突的话，可能会删除一些次要的包（详见 man apt_preferences）<br>    <code>sudo apt-get dist-upgrade</code><br>4.安装（升级）一个或多个软件，也可指定版本号，安装某软件特定版本。pac 也可以使用正则匹配哦<br>    <code>sudo apt-get install pac1  pac2  pac3...</code><br>5.删除软件，用法同 install，会保留配置文件<br>    <code>sudo apt-get remove pac1  pac2  pac3...</code><br>6.用法同 remove ，也将删除配置文件，（这个更彻底）<br>    <code>sudo apt-get purge pac1  pac2  pac3...</code><br>7.获取源码，到当前文件夹下<br>    <code>sudo apt-get source pac</code><br>8.安装相关的编译环境<br>    <code>sudo apt-get build-dep pac</code><br>9.更新缓存，检查是否有损坏的依赖<br>    <code>sudo apt-get check</code><br>10.下载二进制包到当前目录<br>    <code>sudo apt-get download pac</code><br>11.clears out the local repository of retrieved package files，可以释放磁盘空间<br>    <code>sudo apt-get clean</code><br>12.clears out the local repository of retrieved package files，清除不能下载和无用的包，可以释放磁盘空间<br>    <code>sudo apt-get autoclean</code><br>13.remove packages that were automatically installed to satisfy dependencies for some package and that are no more needed.<br>    <code>sudo apt-get autoremove</code><br>14.其他一些参数：如 -y -m -f ，组合起来实现更强大的功能，就不一一列举了，先把系统更新一下再说！</p>
+</blockquote>
+<p>二、源及升级</p>
+<blockquote>
+<p>1.更新源 /etc/apt/sources.list<br>    <code>sudo apt-get install update-manager-core</code><br>2.升级版本<br>    <code>sudo do-release-upgrade</code></p>
 </blockquote>
 
       
@@ -525,7 +532,7 @@ Ubuntu16.04 安装 sublime-text3第一步：添加sublime text 3的仓库    sud
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubuntu16-04-安装-Vmware-tools"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu16.04 安装 Vmware-tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubuntu16-04-安装-sublime-text3"><span class="nav-number">2.</span> <span class="nav-text">Ubuntu16.04 安装 sublime-text3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubuntu16-04-安装-fcitx中文输入法"><span class="nav-number">3.</span> <span class="nav-text">Ubuntu16.04 安装 fcitx中文输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看Linux版本信息"><span class="nav-number">4.</span> <span class="nav-text">查看Linux版本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看LInux端口信息"><span class="nav-number">5.</span> <span class="nav-text">查看LInux端口信息</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubuntu16-04-安装-Vmware-tools"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu16.04 安装 Vmware-tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubuntu16-04-安装-sublime-text3"><span class="nav-number">2.</span> <span class="nav-text">Ubuntu16.04 安装 sublime-text3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ubuntu16-04-安装-fcitx中文输入法"><span class="nav-number">3.</span> <span class="nav-text">Ubuntu16.04 安装 fcitx中文输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看Linux版本信息"><span class="nav-number">4.</span> <span class="nav-text">查看Linux版本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看Linux端口信息"><span class="nav-number">5.</span> <span class="nav-text">查看Linux端口信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强大的apt-get命令"><span class="nav-number">6.</span> <span class="nav-text">强大的apt-get命令</span></a></li></ol></div>
             
           </div>
         </section>

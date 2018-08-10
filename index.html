@@ -427,58 +427,18 @@
 
       
         
-          
-            <h2 id="Leetcode-16-3Sum-Closest"><a href="#Leetcode-16-3Sum-Closest" class="headerlink" title="Leetcode_16.3Sum Closest"></a>Leetcode_16.3Sum Closest</h2><p><code>Type:</code> <font face="consolas" color="red" size="2.5">Array</font><br><code>Difficulty:</code> <font face="consolas" color="orange" size="2.5">Medium</font><br><strong>Description</strong>  </p>
+          <h2 id="Leetcode-16-3Sum-Closest"><a href="#Leetcode-16-3Sum-Closest" class="headerlink" title="Leetcode_16.3Sum Closest"></a>Leetcode_16.3Sum Closest</h2><p><code>Type:</code> <font face="consolas" color="red" size="2.5">Array</font><br><code>Difficulty:</code> <font face="consolas" color="orange" size="2.5">Medium</font><br><strong>Description</strong>  </p>
 <blockquote>
 <p>Given an array <code>nums</code> of <em>n</em> integers and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>. Return the sum of the three integers. You may assume that each input would have exactly one solution.  </p>
 </blockquote>
 <p><strong>Example</strong>  </p>
 <blockquote>
-<p><code>Given array nums = [-1, 2, 1, -4], and target = 1.</code><br><code>The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</code>  </p>
-</blockquote>
-<p><strong>My Dirty and Ugly Answer</strong><br><code>#Python, 695ms, beats 1.95%</code>  </p>
-<blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threeSumClosest</span><span class="params">(self, nums, target)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type nums: List[int]</div><div class="line">        :type target: int</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">        max_diff = <span class="number">10000000</span></div><div class="line">        closed = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> len(nums) &lt; <span class="number">3</span>:</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">for</span> start, st <span class="keyword">in</span> enumerate(nums[:<span class="number">-2</span>]):</div><div class="line">            <span class="keyword">for</span> second, se <span class="keyword">in</span> enumerate(nums[start+<span class="number">1</span>:<span class="number">-1</span>]):</div><div class="line">                <span class="keyword">for</span> th <span class="keyword">in</span> nums[start+second+<span class="number">2</span>:]:</div><div class="line">                    <span class="keyword">if</span> st+se+th == target:</div><div class="line">                        <span class="keyword">return</span> target</div><div class="line">                    <span class="keyword">if</span> abs(target - (st+se+th)) &lt; max_diff:</div><div class="line">                        max_diff = abs(target - (st+se+th))</div><div class="line">                        closed = st+se+th</div><div class="line">        <span class="keyword">return</span> closed</div></pre></td></tr></table></figure>
-</blockquote>
-<p><strong>The Best Answer</strong><br><code>#Python, 28ms, beats 100%</code>  </p>
-<blockquote>
-<p>Author:<em>In each loop,I judge if current number plus two largest numbers less than target,or current number plus two lowest numbers greater than target</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threeSumClosest</span><span class="params">(self, nums, target)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type nums: List[int]</div><div class="line">        :type target: int</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">		nums.sort()</div><div class="line">        length = len(nums)</div><div class="line">        closest = []</div><div class="line">        <span class="keyword">for</span> i, num <span class="keyword">in</span> enumerate(nums[<span class="number">0</span>:<span class="number">-2</span>]):</div><div class="line">            l,r = i+<span class="number">1</span>, length<span class="number">-1</span>			</div><div class="line">            <span class="keyword">if</span> num+nums[r]+nums[r<span class="number">-1</span>] &lt; target:</div><div class="line">                closest.append(num+nums[r]+nums[r<span class="number">-1</span>])</div><div class="line">            <span class="keyword">elif</span> num+nums[l]+nums[l+<span class="number">1</span>] &gt; target:</div><div class="line">                closest.append(num+nums[l]+nums[l+<span class="number">1</span>])</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">while</span> l &lt; r:</div><div class="line">                    closest.append(num+nums[l]+nums[r])</div><div class="line">                    <span class="keyword">if</span> num+nums[l]+nums[r] &lt; target:</div><div class="line">                        l += <span class="number">1</span></div><div class="line">                    <span class="keyword">elif</span> num+nums[l]+nums[r] &gt; target:</div><div class="line">                        r -= <span class="number">1</span></div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">return</span> target</div><div class="line">        closest.sort(key=<span class="keyword">lambda</span> x:abs(x-target))</div><div class="line">        <span class="keyword">return</span> closest[<span class="number">0</span>]</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p><strong>Note</strong>  </p>
-<blockquote>
-<ul>
-<li>尽量别用循环，太慢</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="Leetcode-55-Jump-Game"><a href="#Leetcode-55-Jump-Game" class="headerlink" title="Leetcode_55.Jump Game"></a>Leetcode_55.Jump Game</h2><p><code>Type:</code> <font face="consolas" color="red" size="2.5">Array</font><br><code>Difficulty:</code> <font face="consolas" color="orange" size="2.5">Medium</font><br><strong>Description</strong>  </p>
-<blockquote>
-<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.<br>Each element in the array represents your maximum jump length at that position.<br>Determine if you are able to reach the last index.</p>
-</blockquote>
-<p><strong>Example 1</strong>  </p>
-<blockquote>
-<p><code>Input: [2,3,1,1,4]</code><br><code>Output: true</code><br><code>Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</code>  </p>
-</blockquote>
-<p><strong>Example 2</strong>  </p>
-<blockquote>
-<p><code>Input: [3,2,1,0,4]</code><br><code>Output: false</code><br><code>Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0</code></p>
-</blockquote>
-<p><strong>My Dirty and Ugly Answer</strong><br><code>#Python, 28ms, beats 88.74%</code>  </p>
-<blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canJump</span><span class="params">(self, nums)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type nums: List[int]</div><div class="line">        :rtype: bool</div><div class="line">        """</div><div class="line">        <span class="comment">####################################################</span></div><div class="line">        <span class="comment"># -----Recursive Solution Causes Memory Error----- 	</span></div><div class="line">        <span class="comment"># if len(nums) == 1:							  	</span></div><div class="line">        <span class="comment">#     return true                                 	</span></div><div class="line">        <span class="comment"># for r in range(len(nums)-2, -1, -1):			  	</span></div><div class="line">        <span class="comment">#     if nums[r] &gt;= len(nums)-1-r:				  </span></div><div class="line">        <span class="comment">#         return True and self.canJump(nums[:r+1])	</span></div><div class="line">        <span class="comment"># return false                                    	</span></div><div class="line">        <span class="comment">####################################################	</span></div><div class="line">        <span class="comment"># -----Good Answer------</span></div><div class="line">        target = len(nums) - <span class="number">1</span></div><div class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> range(len(nums)<span class="number">-2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</div><div class="line">            <span class="keyword">if</span> nums[r] &gt;= target - r:</div><div class="line">                target = r</div><div class="line">            <span class="keyword">elif</span> r == <span class="number">0</span>:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
-</blockquote>
-<p><strong>The Best Answer</strong>  </p>
-<blockquote>
-<p>Waiting for your answer…  </p>
-</blockquote>
-<p><strong>Note</strong>  </p>
-<blockquote>
-<ul>
-<li>递归很耗内存</li>
-</ul>
-</blockquote>
-
-          
+<p><code>Given array nums = [-1, 2, 1, -4], and target = 1.</code><br><code>The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).</code><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/08/09/LeetCode刷题之路/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>

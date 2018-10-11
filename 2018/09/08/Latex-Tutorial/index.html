@@ -84,23 +84,24 @@
 
 
 
-<meta name="description" content="Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try BeamerThe first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get start.  
+<meta name="description" content="Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try BeamerThe first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get it.  
 Introduction
-LaTeX: LaTeX">
+LaTeX: LaTeX is">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LaTeX Tutorial">
 <meta property="og:url" content="http://cycygogo.cn/2018/09/08/Latex-Tutorial/index.html">
 <meta property="og:site_name" content="Lucy's Hugo!">
-<meta property="og:description" content="Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try BeamerThe first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get start.  
+<meta property="og:description" content="Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try BeamerThe first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get it.  
 Introduction
-LaTeX: LaTeX">
+LaTeX: LaTeX is">
 <meta property="og:image" content="http://ogddv0qu3.bkt.clouddn.com/la.PNG">
-<meta property="og:updated_time" content="2018-10-04T15:15:23.654Z">
+<meta property="og:image" content="http://ogddv0qu3.bkt.clouddn.com/latexalgpseudocode.png">
+<meta property="og:updated_time" content="2018-10-11T03:00:17.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX Tutorial">
-<meta name="twitter:description" content="Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try BeamerThe first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get start.  
+<meta name="twitter:description" content="Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try BeamerThe first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get it.  
 Introduction
-LaTeX: LaTeX">
+LaTeX: LaTeX is">
 <meta name="twitter:image" content="http://ogddv0qu3.bkt.clouddn.com/la.PNG">
 
 
@@ -331,7 +332,7 @@ LaTeX: LaTeX">
       
 
       
-        <p><code>Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try Beamer</code><br><em>The first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get start.</em>  </p>
+        <p><code>Word is good, but LaTeX is perfect. Tired of Powerpoint? Then try Beamer</code><br><em>The first step to ‘Brexit’(Depart away from ‘O’ffice) is to learn and use LaTeX. So let’s get it.</em>  </p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><blockquote>
 <p><a href="https://www.latex-project.org/" target="_blank" rel="external"><strong>LaTeX</strong></a>: LaTeX is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation. LaTeX is the de facto standard for the communication and publication of scientific documents.<br><a href="https://en.wikipedia.org/wiki/Beamer_(LaTeX)" target="_blank" rel="external"><strong>Beamer</strong></a>: Beamer is a LaTeX document class for creating slides for presentations.  </p>
 </blockquote>
@@ -375,10 +376,44 @@ This is a text in first frame. This is a text in first frame. This is a text in 
 
 \end{document}
 </code></pre><p><img src="http://ogddv0qu3.bkt.clouddn.com/la.PNG" alt=""></p>
-<h2 id="LaTeX-Syntax"><a href="#LaTeX-Syntax" class="headerlink" title="LaTeX Syntax"></a>LaTeX Syntax</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<h2 id="LaTeX-Syntax"><a href="#LaTeX-Syntax" class="headerlink" title="LaTeX Syntax"></a>LaTeX Syntax</h2><p>First, I recommend to refer these tutorials: </p>
+<ul>
+<li><a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes" target="_blank" rel="external">Learn_LaTeX_in_30_minutes</a>  </li>
+<li><a href="https://reu.dimacs.rutgers.edu/Symbols.pdf" target="_blank" rel="external">LaTeX Mathematical Symbols</a>   </li>
+</ul>
+<p>Besides, I also collected some other useful tricks I once used here:<br><strong>1. Algorithm Pseudocode</strong>  </p>
+<blockquote>
+<p>You can check this wikibook <a href="https://en.wikibooks.org/wiki/LaTeX/Algorithms" target="_blank" rel="external">LaTeX/Algorithms</a>. There is good example:<br><strong>Code:</strong>  </p>
+</blockquote>
+<pre><code>\documentclass{article}
+\usepackage[titlenumbered,ruled]{algorithm2e}
+\begin{document}
+\begin{algorithm}[H]
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+
+    \Input{A set of men $M$ such that for all $m \in M$, $m$ is free and has a preference list containing each woman $w \in W$ \newline 
+    A set of women $W$ such that for all $w \in W$, $w$ is free and has a preference list containing each man $m \in M$}
+    \Output{A perfect matching between $M$ and $W$ with no strong instability}
+    \caption{Modified Gale-Shapley algorithm allowing indifferences}
+\end{algorithm}
+\end{document} 
+</code></pre><blockquote>
+<p><strong>Output:</strong><br><img src="http://ogddv0qu3.bkt.clouddn.com/latexalgpseudocode.png" alt=""></p>
+<p>And <a href="https://tex.stackexchange.com/questions/163768/write-pseudo-code-in-latex" target="_blank" rel="external"><strong>here</strong></a> is another good example.  </p>
+</blockquote>
+<p><strong>2. LaTeX Equation with Left Brace</strong>  </p>
+<blockquote>
+<p>This blog: <a href="https://blog.csdn.net/miao0967020148/article/details/78712811" target="_blank" rel="external">LaTeX大括号公式和一般括号总结</a> expatiates on how to write a left brace equation with     several lines in three common ways. I think it’s really good and fully detailed, so I won’t repeat it here.</p>
+</blockquote>
+<p><strong>3. How to Write Reference in an Artical</strong>  </p>
+<blockquote>
+<p>Here is a simple but very clear video guide on YouTube: <a href="https://www.youtube.com/watch?v=KS9GvK7cvmo" target="_blank" rel="external">How to Generate References with LaTeX (BibTeX)</a>. If you can’t see the video… I think my tutorial is also helpless for you. </p>
+</blockquote>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><a href="https://kenjokenjo.wordpress.com/2011/03/20/how-to-install-latex-and-beamereasy/" target="_blank" rel="external">A very good guide: How to Install LaTeX and Beamer</a>  </li>
 <li><a href="https://www.sharelatex.com/learn/Beamer" target="_blank" rel="external">Beamer Tutorial</a></li>
-<li><a href="http://liuchengxu.org/blog-cn/posts/quick-latex/" target="_blank" rel="external">从零开始 LaTeX 快速入门</a></li>
+<li><a href="http://liuchengxu.org/blog-cn/posts/quick-latex/" target="_blank" rel="external">从零开始 LaTeX 快速入门</a>  </li>
 </ul>
 
       
@@ -545,11 +580,11 @@ This is a text in first frame. This is a text in first frame. This is a text in 
               </span>
             
               <span class="links-of-author-item">
-                <a href="mailto:uestc.hugo@gmail.com" target="_blank" title="E-Mail">
+                <a href="uestc.hugo@gmail.com" target="_blank" title="Email">
                   
-                    <i class="fa fa-fw fa-globe"></i>
+                    <i class="fa fa-fw fa-envelope"></i>
                   
-                  E-Mail
+                  Email
                 </a>
               </span>
             

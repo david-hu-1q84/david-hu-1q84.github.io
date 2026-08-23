@@ -179,7 +179,7 @@
             fold = $(settings.container).offset().top + $(settings.container).height();
         }
 
-        return fold <= $(element).offset().top="" -="" settings.threshold;="" };="" $.rightoffold="function(element," settings)="" {="" var="" fold;="" if="" (settings.container="==" undefined="" ||="" settings.container="==" window)="" fold="$window.width()" +="" $window.scrollleft();="" }="" else="" $(settings.container).width();="" return="" <="$(element).offset().left" $.abovethetop="function(element,">= $(element).offset().top + settings.threshold  + $(element).height();
+        return fold <= $(element).offset().top - settings.threshold; }; $.rightoffold="function(element," settings) { var fold; if (settings.container="==" undefined || settings.container="==" window) fold="$window.width()" + $window.scrollleft(); } else $(settings.container).width(); return <="$(element).offset().left" $.abovethetop="function(element,">= $(element).offset().top + settings.threshold  + $(element).height();
     };
 
     $.leftofbegin = function(element, settings) {

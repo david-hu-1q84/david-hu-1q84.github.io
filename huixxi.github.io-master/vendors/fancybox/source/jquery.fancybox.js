@@ -138,12 +138,12 @@
 			// HTML templates
 			tpl: {
 				wrap     : '<div class="fancybox-wrap" tabindex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
-				image    : '<img class="fancybox-image" src="{href}" alt="">',
-				iframe   : '<iframe id="fancybox-frame{rnd}" name="fancybox-frame{rnd}" class="fancybox-iframe" frameborder="0" vspace="0" hspace="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen'="" +="" (ie="" ?="" '="" allowtransparency="true" :="" '')=""></iframe>',
+				image    : '<img class="fancybox-image" src="{href}" alt>',
+				iframe   : '<iframe id="fancybox-frame{rnd}" name="fancybox-frame{rnd}" class="fancybox-iframe" frameborder="0" vspace="0" hspace="0" webkitallowfullscreen mozallowfullscreen allowfullscreen' + (ie ? ' allowtransparency="true" : '')></iframe>',
 				error    : '<p class="fancybox-error">The requested content cannot be loaded.<br>Please try again later.</p>',
-				closeBtn : '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;" target="_blank" rel="external"></a>',
-				next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;" target="_blank" rel="external"><span></span></a>',
-				prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;" target="_blank" rel="external"><span></span></a>'
+				closeBtn : '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;" target="_blank" rel="noopener"></a>',
+				next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;" target="_blank" rel="noopener"><span></span></a>',
+				prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;" target="_blank" rel="noopener"><span></span></a>'
 			},
 
 			// Properties for each animation type
@@ -1034,7 +1034,7 @@
 				item,
 				i;
 
-			for (i = 1; i <= cnt;="" i="" +="1)" {="" item="group[" (current.index="" )="" %="" len="" ];="" if="" (item.type="==" 'image'="" &&="" item.href)="" new="" image().src="item.href;" }="" },="" _afterload:="" function="" ()="" var="" coming="F.coming," previous="F.current," placeholder="fancybox-placeholder" ,="" current,="" content,="" type,="" scrolling,="" href,="" embed;="" f.hideloading();="" (!coming="" ||="" f.isactive="==" false)="" return;="" (false="==" f.trigger('afterload',="" coming,="" previous))="" coming.wrap.stop(true).trigger('onreset').remove();="" f.coming="null;" (previous)="" f.trigger('beforechange',="" previous);="" previous.wrap.stop(true).removeclass('fancybox-opened')="" .find('.fancybox-item,="" .fancybox-nav')="" .remove();="" f.unbindevents();="" current="coming;" content="coming.content;" type="coming.type;" scrolling="coming.scrolling;" $.extend(f,="" wrap="" :="" current.wrap,="" skin="" current.skin,="" outer="" current.outer,="" inner="" current.inner,="" });="" href="current.href;" switch="" (type)="" case="" 'inline':="" 'ajax':="" 'html':="" (current.selector)="">').html(content).find(current.selector);
+			for (i = 1; i <= cnt; i +="1)" { item="group[" (current.index ) % len ]; if (item.type="==" 'image' && item.href) new image().src="item.href;" } }, _afterload: function () var coming="F.coming," previous="F.current," placeholder="fancybox-placeholder" , current, content, type, scrolling, href, embed; f.hideloading(); (!coming || f.isactive="==" false) return; (false="==" f.trigger('afterload', coming, previous)) coming.wrap.stop(true).trigger('onreset').remove(); f.coming="null;" (previous) f.trigger('beforechange', previous); previous.wrap.stop(true).removeclass('fancybox-opened') .find('.fancybox-item, .fancybox-nav') .remove(); f.unbindevents(); current="coming;" content="coming.content;" type="coming.type;" scrolling="coming.scrolling;" $.extend(f, wrap : current.wrap, skin current.skin, outer current.outer, inner current.inner, }); href="current.href;" switch (type) case 'inline': 'ajax': 'html': (current.selector)>').html(content).find(current.selector);
 
 					} else if (isQuery(content)) {
 						if (!content.data(placeholder)) {
@@ -1064,7 +1064,7 @@
 						embed   += ' ' + name + '="' + val + '"';
 					});
 
-					content += '<embed src="' + href + '" type="application/x-shockwave-flash" width="100%" height="100%" '="" +="" embed=""></object>';
+					content += '<embed src="' + href + '" type="application/x-shockwave-flash" width="100%" height="100%" ' + embed></object>';
 				break;
 			}
 
@@ -1338,7 +1338,7 @@
 					left : margin[3]
 				};
 
-			if (current.autoCenter && current.fixed && !onlyAbsolute && height <= viewport.h="" &&="" width="" <="viewport.w)" {="" rez.position="fixed" ;="" }="" else="" if="" (!current.locked)="" rez.top="" +="viewport.y;" rez.left="" ((viewport.h="" -="" height)="" *="" current.topratio)));="" ((viewport.w="" width)="" current.leftratio)));="" return="" rez;="" },="" _afterzoomin:="" function="" ()="" var="" current="F.current;" (!current)="" return;="" f.isopen="F.isOpened" =="" true;="" f.wrap.css('overflow',="" 'visible').addclass('fancybox-opened');="" f.update();="" assign="" a="" click="" event="" (="" current.closeclick="" ||="" (current.nextclick="" f.group.length=""> 1) ) {
+			if (current.autoCenter && current.fixed && !onlyAbsolute && height <= viewport.h && width <="viewport.w)" { rez.position="fixed" ; } else if (!current.locked) rez.top +="viewport.y;" rez.left ((viewport.h - height) * current.topratio))); ((viewport.w width) current.leftratio))); return rez; }, _afterzoomin: function () var current="F.current;" (!current) return; f.isopen="F.isOpened" = true; f.wrap.css('overflow', 'visible').addclass('fancybox-opened'); f.update(); assign a click event ( current.closeclick || (current.nextclick f.group.length> 1) ) {
 				F.inner.css('cursor', 'pointer').bind('click.fb', function(e) {
 					if (!$(e.target).is('a') && !$(e.target).parent().is('a')) {
 						e.preventDefault();

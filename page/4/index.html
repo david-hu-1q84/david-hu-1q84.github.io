@@ -260,8 +260,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/10/02/TED-The-biology-of-our-best-and-worst-selves/" itemprop="url">
-                  TED-The biology of our best and worst selves
+                <a class="post-title-link" href="/2019/06/03/RL-Paper-03/" itemprop="url">
+                  RL_Paper_03
                 </a>
               
             
@@ -274,8 +274,441 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-10-02T10:30:55+08:00" content="2017-10-02">
-              2017-10-02
+            <time itemprop="dateCreated" datetime="2019-06-03T00:00:00+08:00" content="2019-06-03">
+              2019-06-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/06/03/RL-Paper-03/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/03/RL-Paper-03/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Rainbow-Combining-Improvements-in-Deep-Reinforcement-Learning"><a href="#Rainbow-Combining-Improvements-in-Deep-Reinforcement-Learning" class="headerlink" title="Rainbow: Combining Improvements in Deep Reinforcement Learning"></a>Rainbow: Combining Improvements in Deep Reinforcement Learning</h2><p> <em><a href="https://arxiv.org/pdf/1710.02298.pdf" target="_blank" rel="noopener">Paper Source</a></em><br><code>Journal: The Thirty-Second AAAI Conference on Artificial Intelligence (AAAI-18)</code><br><code>Year: 2017</code><br><code>Institute: DeepMind</code><br><code>Author: Matteo Hessel, Joseph Modayil, Hado van Hasselt</code><br><code>#</code> <em>Deep Reinforcement Learning</em><br> _</p>
+<p>Abstract</p>
+<p>_ This paper examines six main extensions to DQN algorithm and empirically studies their combination. (It is a good paper which gives you a summary of several important technologies to alleviate the problems remaining in DQN and provides you some valuable insights in this research region.)<br><a href="https://github.com/Huixxi/CS234-Reinforcement-Learning/tree/master/assignment%202" target="_blank" rel="noopener">Baseline: Deep Q-Network(DQN) Algorithm Implementation in CS234 Assignment 2</a></p>
+<p><em>1.INTRODUCTION</em><br>Because the traditional tabular methods are not applicable in arbitrarily large state spaces, we turn to those approximate solution methods (<code>linear approximator &amp; nonlinear approximator</code> <code>value-function approximation &amp; policy approximation</code>), which is to find a good approximate solution using limited computational resources. We can use a <code>linear function</code>, or <code>multi-layer artificial neural networks</code>, or <code>decision tree</code> as a parameterized function to approximate the value-function or policy.(More, see Sutton’s book <a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener">Reinforcement Learning: An Introduction</a> Chapter 9).<br>The following methods are all <code>value-function approximation</code> and <code>gradient-based(using the gradients to update the parameters)</code>, and they all use <strong>experience replay</strong> and <strong>target network</strong> to eliminate the correlations present in the sequence of observations.<br> _ _1 &gt; Linear__<br>Using a linear function to approximate the value function(always the action value).</p>
+<p>$w$ is the parameters, $x(s)$ is called a <strong>feature vector</strong> representing state $s$, and the state $s$ is the images(frames) observed by the agent in most time. So a linear approximator implemented with <em>tensorflow</em> can be just a fully-connected layer.  </p>
+<pre><code>1  
+2  
+3  
+4  
+5  
+</code></pre><p>| </p>
+<pre><code>import tensorflow as tf  
+# state: a sequence of image(frame)  
+inputs = tf.layers.flatten(state)  
+# scope, which is used to distinguish q_params and target_q_params  
+out = layers.fully_connected(inputs, num_actions, scope=scope, reuse=reuse)  
+</code></pre><p>—|—  </p>
+<p><strong>2 &gt; Nonlinear - DQN</strong><br> <strong> <em>Deep Q-Network.</em></strong> The main difference of <em>DQN</em> from <em>linear approximator</em> is the architecture of getting the _q_value_ , it is nonlinear.<br><img src="https://media.nature.com/lw926/nature-assets/nature/journal/v518/n7540/images/nature14236-f1.jpg" alt><br>And the total algorithm is as follows:<br><img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/dqn_algorithm.png" alt><br>The approximator of DeepMind DQN implemented with <em>tensorflow</em> as described in their <a href="https://www.nature.com/articles/nature14236" target="_blank" rel="noopener">Nature paper</a> can be:  </p>
+<pre><code>1  
+2  
+3  
+4  
+5  
+6  
+7  
+8  
+</code></pre><p>| </p>
+<pre><code>import tensorflow as tf  
+with tf.variable_scope(scope, reuse=reuse) as _:  
+    conv1 = layers.conv2d(state, num_outputs=32, kernel_size=(8, 8), stride=4, activation_fn=tf.nn.relu)  
+    conv2 = layers.conv2d(conv1, num_outputs=64, kernel_size=(4, 4), stride=2, activation_fn=tf.nn.relu)  
+    conv3 = layers.conv2d(conv2, num_outputs=64, kernel_size=(3, 3), stride=1, activation_fn=tf.nn.relu)  
+    full_inputs = layers.flatten(conv3)  
+    full_layer = layers.fully_connected(full_inputs, num_outputs=512, activation_fn=tf.nn.relu)  
+    out = layers.fully_connected(full_layer, num_outputs=num_actions)  
+</code></pre><p>—|—  </p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_dqn_simple.py" target="_blank" rel="noopener">Do DQN from scratch(sample version)</a></p>
+<p><strong>3 &gt; Nonlinear - DDQN</strong><br> <strong> <em>Double DQN.</em></strong> The main difference of <em>DDQN</em> from <em>DQN</em> is the way of calculating the target q value.<br>As a reminder,<br>In <em>Q-Learning:</em></p>
+<p>In <em>DQN:</em><br><img src="https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png" alt><br>where $\theta_{i-1}$ is the target network parameters which is always represeted with $\theta_t^-$.</p>
+<p>There is a problem with deep q-learning that “It is known to sometimes learn unrealistically high action values because it includes a maximization step over estimated action values, which tends to prefer overestimated to underestimated values” as said in <a href="https://arxiv.org/pdf/1509.06461.pdf" target="_blank" rel="noopener">DDQN paper</a>.<br>The idea of <em>Double Q-learning</em> is to reduce overestimations by decomposing the max operation in the target into action selection and action evaluation.</p>
+<p>Implement with <em>tensorflow</em> (the minimal possible change to DQN in cs234 assignment 2)  </p>
+<pre><code>1  
+2  
+3  
+4  
+5  
+6  
+7  
+8  
+9  
+10  
+11  
+12  
+13  
+</code></pre><p>| </p>
+<pre><code># DQN  
+q_samp = tf.where(self.done_mask, self.r, self.r + self.config.gamma * tf.reduce_max(target_q, axis=1))  
+actions = tf.one_hot(self.a, num_actions)  
+q = tf.reduce_sum(tf.multiply(q, actions), axis=1)  
+self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))  
+
+# DDQN  
+max_q_idxes = tf.argmax(q, axis=1)  
+max_actions = tf.one_hot(max_q_idxes, num_actions)  
+q_samp = tf.where(self.done_mask, self.r, self.r + self.config.gamma * tf.reduce_sum(tf.multiply(target_q, max_actions), axis=1))  
+actions = tf.one_hot(self.a, num_actions)  
+q = tf.reduce_sum(tf.multiply(q, actions), axis=1)  
+self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))  
+</code></pre><p>—|—  </p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_ddqn_simple.py" target="_blank" rel="noopener">Do Double DQN from scratch(sample version)</a></p>
+<p><strong>4 &gt;Prioritized experience replay</strong><br> <strong> <em>Prioritized experience replay.</em></strong> Improve data efficiency, by replaying more often transitions from which there is more to learn.<br>And the total algorithm is as follows:<br><img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/prior_replay.png" alt></p>
+<ul>
+<li><p>Temporal-Difference(TD) Error<br>TD-Error:<br>Where the value $r + \lambda V(s’) $ is known as the TD target.<br>Experiences with high magnitude TD error also appear to be replayed more often. </p>
+</li>
+<li><p>Stochastic Prioritization</p>
+</li>
+</ul>
+<ul>
+<li>Importance Sampling(IS)</li>
+</ul>
+<p><strong>5 &gt;Dueling network architecture</strong><br> <strong> <em>Dueling network architecture.</em></strong> Generalize across actions by separately representing state values and action advantages.</p>
+<p><strong>6 &gt;Multi-step bootstrap targets in A3C</strong><br> <strong> <em>Multi-step bootstrap targets.</em></strong> Shift the bias-variance tradeoff and helps to propagate newly observed rewards faster to earlier visited states.</p>
+<p><strong>7 &gt;Distributional Q-learning</strong><br> <strong> <em>Distributional Q-learning.</em></strong> Learn a categorical distribution of discounted returns, instead of estimating the mean.</p>
+<p><strong>8 &gt;Noisy DQN</strong><br> <strong> <em>Noisy DQN.</em></strong> Use stochastic network layers for exploration.</p>
+<p><em>REFERENCES</em><br><a href="https://towardsdatascience.com/deep-double-q-learning-7fca410b193a" target="_blank" rel="noopener">1.Self Learning AI-Agents III:Deep (Double) Q-Learning(Blog)</a><br><a href="https://blog.csdn.net/qq_30615903/article/details/80744083" target="_blank" rel="noopener">2.【强化学习】Deep Q Network(DQN)算法详解(Bolg)</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/05/12/RL-Paper-01-Self-Regulated-Learning/" itemprop="url">
+                  RL_Paper_01:Self-Regulated Learning
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-05-12T00:00:00+08:00" content="2019-05-12">
+              2019-05-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/05/12/RL-Paper-01-Self-Regulated-Learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/12/RL-Paper-01-Self-Regulated-Learning/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Aerobatics-Control-of-Flying-Creatures-via-Self-Regulated-Learning"><a href="#Aerobatics-Control-of-Flying-Creatures-via-Self-Regulated-Learning" class="headerlink" title="Aerobatics Control of Flying Creatures via Self-Regulated Learning"></a>Aerobatics Control of Flying Creatures via Self-Regulated Learning</h2><p> <em><a href="http://mrl.snu.ac.kr/research/ProjectAerobatics/Aerobatics.htm" target="_blank" rel="noopener">Paper Source</a></em><br><code>Journal: ACM Transactions on Graphics</code><br><code>Year: 2018</code><br><code>Institute: Seoul National University, South Korea</code><br><code>Author: JUNGDAM WON, JUNGNAM PARK, JEHEE LEE*</code><br><code>#</code> <em>Physics-Based Controller</em> <code>#</code> <em>Deep Reinforcement Learning(DRL)</em> <code>#</code> <em>Self-Regulated Learning</em><br> _</p>
+<p>Abstract</p>
+<p>_ <strong><em>Self-Regulated Learning (SRL)</em></strong> , which is combined with <strong><em>DRL</em></strong> to address the <strong><em>aerobatics control</em></strong> problem. The key idea of <strong><em>SRL</em></strong> is to allow the agent to take control over its own learning using an additional <strong><em>self-regulation policy</em></strong>. The policy allows the agent to regulate its goals according to the capability of the current control policy. The control and self-regulation policies are learned jointly along the progress of learning. Self-regulated learning can be viewed as building its own curriculum and seeking compromise on the goals.  </p>
+<blockquote>
+<p>自调节学习(SRL)，与DRL相结合，解决特技飞行控制问题。SRL的关键思想是允许代理(agent)使用额外的自我调节政策来控制自己的学习。该政策允许代理根据当前控制政策的能力来调节其目标。控制和自我调节政策是沿着学习的过程共同学习的。自我调节学习可以被视为建立自己的课程并寻求对目标的妥协。</p>
+</blockquote>
+<p><em>1.INTRODUCTION</em><br>Defining a reward for taking an action is the primary means by which the user can influence the control policy. The reward is a succinct description of the task. The choice of the reward also affects the performance of the controller and the progress of its learning. </p>
+<p>We consider a class of problems in which <em>the main goal can be achieved by generating a sequence of subgoals and addressing each individual subgoal sequentially.</em></p>
+<blockquote>
+<p>定义采取行动的奖励是用户可以影响控制策略的主要手段。奖励是对任务的简洁描述。奖励的选择也会影响控制器的性能和学习的进度。<br>我们考虑这一类特定问题，其主要目标可以通过生成一系列子目标并按顺序处理每个单独的子目标来实现。</p>
+</blockquote>
+<p><em>2.RELATED WORK</em><br> <strong> <em><a href="https://www.thoughtco.com/principle-of-optimality-definition-1147078" target="_blank" rel="noopener">Optimality principles</a></em></strong> played an important role of popularizing optimal control theory and nonlinear/non-convex optimization methods in character animation. We can classify control policies (a.k.a., controllers) into <strong><em>immediate control</em></strong> and <strong><em>predictive control</em></strong> depending on how far they look ahead into their future. </p>
+<blockquote>
+<p><code>Optimality principles:</code> The principle of optimality is the basic principle of dynamic programming, which was developed by Richard Bellman: that an optimal path has the property that whatever the initial conditions and control variables (choices) over some initial period, the control (or decision variables) chosen over the remaining period must be optimal for the remaining problem, with the state resulting from the early decisions taken to be the initial condition. </p>
+</blockquote>
+<p><code>Immediate control policy:</code> A direct mapping from states to actions.<br><code>Model predictive control:</code> The key concept is to predict the future evolution of the dynamic system for short time horizon and optimize its control signals. Model predictive control repeats this prediction and optimization step while receding the time horizon. </p>
+<p>Recently, Deep Reinforcement Learning (DRL) has shown its potential in simulation and control of virtual characters. DRL for continuous control (especially <strong><em>actor-critic framework</em></strong> [<a href="http://busoniu.net/files/papers/ivo_smcc12_survey.pdf" target="_blank" rel="noopener">survey</a>]) has advantages of both immediate control and predictive control. </p>
+<p>SRL assumes that the reward function provided initially is not ideal for achieving the main goal and thus allows the agent to transform the reward function adaptively. Underlying motivation of SRL is closely related to <strong><em><a href="https://www.ijcai.org/proceedings/2017/0757.pdf" target="_blank" rel="noopener">automatic curriculum generation</a></em></strong> for RL agents. </p>
+<blockquote>
+<p><strong><em>最优性原理</em></strong> 在推广最优控制理论和角色动画中的非线性/非凸优化方法起到了重要作用。我们可以将控制策略（也就是控制器）分类，根据它能够对未来展望多远分为 <strong> <em>立即控制</em></strong> 和 <strong> <em>预测控制</em></strong> 。 </p>
+<blockquote>
+<p><strong><em>最优性原理：</em></strong> 最优性原理是动态规划的基本原理，由R.Bellman等人通过研究一类多阶段决策问题提出，“作为整个过程的最优策略，无论过去的状态和决策如何，对前面的决策形成的状态而言，余下的诸决策必构成最优策略。” 简言之，一个最优策略的子策略总是最优的。 </p>
+</blockquote>
+<p><code>立即控制策略：</code>从状态到动作的直接映射。<br><code>模型预测控制：</code>关键概念是预测短期内动态系统的未来发展，优化其控制信号。模型预测控制在时间范围后退的同时重复这一预测和优化步骤。<br>近年来，深度强化学习（DRL）在虚拟人物的仿真和控制方面显示出其潜力。连续控制的DRL（尤其是 <strong> <em>演员－批评家框架</em></strong> ）具有立即控制和预测控制的优点。<br>SRL假设最初提供的奖励函数不适合实现主要目标，因此允许代理自适应地转换奖励函数。SRL的潜在动机与RL代理的 <strong> <em>课程自动生成</em></strong> 密切相关。</p>
+</blockquote>
+<p><em>3.ENVIRONMENT</em><br>There refers to some basic specific knowledge about physics and physics control. So just understand the concepts of these definations and symbols to the degree of understanding the following algorithms without any troubles.</p>
+<blockquote>
+<p><code>Trajectory</code> $C(\sigma) = (R(\sigma), p(\sigma), h(\sigma))$ </p>
+<blockquote>
+<p><code>Progress Parameter</code> $\sigma \in [0, 1]$<br><code>Orientation</code> $R(\sigma) \in SO(3)$ <a href="https://www.quora.com/What-are-SU-2-SO-3-and-other-similar-names-in-physics" target="_blank" rel="noopener">What SO(3) is?</a><br><code>Position</code> $p(\sigma) \in R^3$<br><code>Clearance Threshold</code> $h(\sigma)$ </p>
+</blockquote>
+<p><code>Distance</code><br>if $d(R, p, \sigma^<em>) &lt; h(\sigma^</em>)$, then $C(\sigma^*)$ is cleared.<br><code>Unit tangent vector</code> $t(\sigma) = \frac{\dot{p(\sigma)}}{||\dot{p(\sigma)}||}$<br><code>Up-Vector</code> $u = [0, 1, 0]$<br><code>Initial Orientation</code> $R(0) = [r^T_x, r^T_y, r^T_z] \in SO(3)$ is defined by an orthogonal frame such that</p>
+<blockquote>
+<p>$r_z = t(0)$,<br>$r_x = \frac{u×r_z}{||u×r_z||}$<br>$r_y = r_z × r_x$.</p>
+</blockquote>
+<p><code>Trajectory Rotation</code> $R(\sigma) = R(\sigma − \epsilon)U(t(\sigma − \epsilon), t(\sigma))$<br><code>Minimal Rotation between two vectors a and b</code><br>$U(a, b) = I + [a × b]<em>× + [a × b]^2</em>× \frac{1 − a·b}{(a × b)^T(a × b)}$<br>$[v]_×$ is the skew-symmetric cross-product matrix of $v$.<br><code>Relaxed Clearance Threshold</code> $h(\sigma) = \bar{h}(1 + w_h ||\ddot{p}(\sigma)||)$<br><code>Reward defination</code></p>
+</blockquote>
+<p><em>4.ALGORITHM</em><br> <em>DRL Algorithm</em><br>That algorithm is similar with <strong><em>actor-critic framework</em></strong> , it also has two deep neural networks, one called $Q$, represents <em>state-action value function</em> , state-action pair $(s, a)$ as input and returns the expectation on cumulative rewards. Another called $\pi$The deterministic policy $\pi$ takes state $s$ as input and generates action $a$.<br>It consists of two parts:</p>
+<ul>
+<li>Generating a seuqence of $e_i = (s_{i−1}, a_i, r_i, s_i)$ tuples to simulate the given trajectory.</li>
+<li>Using a single sample of the former sequence to update the state-action value function and policy function repetedly.</li>
+</ul>
+<p><em>Self-Regulated DRL</em><br>Intuitively speaking, the agent senses its body state $s_d$ and a part of the trajectory $(\sigma, s_s)$, and decides how to act and how to regulate the current subgoal $C(\sigma)$ simultaneously while avoiding excessive deviation from the input trajectory.</p>
+<p><em>Experts in related field</em><br><a href="https://xbpeng.github.io/" target="_blank" rel="noopener">Jason Peng</a><br><a href="http://libliu.com/" target="_blank" rel="noopener">Libin Liu</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/01/03/无老师的作文巨讲堂/" itemprop="url">
+                  无老师的作文巨讲堂
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-01-03T20:38:44+08:00" content="2019-01-03">
+              2019-01-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/01/03/无老师的作文巨讲堂/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/03/无老师的作文巨讲堂/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="2016年02月号"><a href="#2016年02月号" class="headerlink" title="2016年02月号"></a>2016年02月号</h3><p>无老师优秀翻译：首先，我们很少有人能否认这一点，也就是学生被限制在了书本里面，从不被鼓励去了解，分析以及讨论这个世界的热点事件。首先，教师的想法能够提供给他们对于现在发生的事情的最基本的信息。而且，常识也告诉我说，当我们想传递一个信息的时候如果想完全不掺杂个人的一个见解，这根本是不可能的。而且我们还经常会遇到这样的事情，也就是当教师想去分享一个社会上最新发生的事情的时候，他们会无意识地去加入一些自己的理解。但是这仍然开阔了学生们的视野。  </p>
+<p>无老师优秀范例：To begin with, few of us would deny that students are constrained to their text books and hardly encouraged to acknowledge, analyze and discuss heated global issues. On the first stage, teachers’ points offer them a general information of the current happening events. Also, common sense informed me that it’s kind of impossible to deliver the content without any personal stand. It’s not uncommon that when teachers try to share the latest social events, they add their comprehensions unconsciously. But it still opens up students’ outlooks. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2019/01/03/无老师的作文巨讲堂/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/09/23/TOEFL-SPEAKING/" itemprop="url">
+                  TOEFL_SPEAKING
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-09-23T23:54:12+08:00" content="2018-09-23">
+              2018-09-23
             </time>
           </span>
 
@@ -304,8 +737,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/10/02/TED-The-biology-of-our-best-and-worst-selves/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/02/TED-The-biology-of-our-best-and-worst-selves/" itemprop="commentsCount"></span>
+                <a href="/2018/09/23/TOEFL-SPEAKING/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/23/TOEFL-SPEAKING/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,143 +762,11 @@
 
       
         
-          
-            <h2 id="The-Biology-of-Our-Best-and-Worst-Selves-by-Robert-Sapolsky"><a href="#The-Biology-of-Our-Best-and-Worst-Selves-by-Robert-Sapolsky" class="headerlink" title="The Biology of Our Best and Worst Selves by Robert Sapolsky"></a>The Biology of Our Best and Worst Selves by Robert Sapolsky</h2><blockquote>
-<p><strong>Details</strong><br>  How can humans be so compassionate and altruistic – and also brutal and violent? To understand why we do what we do, neuroscientist Robert Sapolsky looks at extreme context, examining actions on timescales from seconds to millions of years before they occured. In this fascinating talk, he shares his cutting edge research into the biology that drivas our worst and best behaviors.<br><strong>TED Presenter</strong><br>  Chris Anderson:<br>  So Robert spent the last few years, thinking about how weird the human behaviors is and how inadequate most of our language trying to explain it is. And it is very exciting to hear him to explain some thinking behaind it in public for the first time。Over to you now, Robert Sapolsky.<br>  (Applause)<br>  Robert Sapolsky:</p>
+          <h2 id="Scent-of-a-Woman-Movies"><a href="#Scent-of-a-Woman-Movies" class="headerlink" title="Scent of a Woman(Movies)"></a>Scent of a Woman(Movies)</h2><blockquote>
+<p><em>It’s one of the most beautiful movies ever</em><br>“I think this incredible movie leaves a legacy of life, it makes us appreciate life an also understand that a life can be lived in a minute just like Al Pacino says in one of this movie’s most beautiful scences, it also talks about values, intergrity, and moral principles, by sides of this movie’s wonderful script it’s incredible cast makes it one of the most outstanding movies I have ever seen. The incredible scene of tango, the deep arguments about life between Al Pacino’s character and Chris O’Donnell’s, and also those scenes when Al Pacino’s character scenes women’s scent and tells them the name of the perfume or the name of the soap it’s really amazing, all of this with the sarcastic sense of humor of this movie, it’s really great. I truly recommend to see it.”</p>
 </blockquote>
-<blockquote>
-<p><strong>Vocabulary</strong><br>  compassionate: 慈悲的，富有同情心的<br>  altruistic   : 利他的，无私的<br>  cutting edge research: 前沿研究<br>  inadequate   : 不充分的，不适当的</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/22/PostgreSQL-入门/" itemprop="url">
-                  PostgreSQL 入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-08-22T12:38:27+08:00" content="2017-08-22">
-              2017-08-22
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index">
-                    <span itemprop="name">Tech</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/08/22/PostgreSQL-入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/08/22/PostgreSQL-入门/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="Postgresql-安装"><a href="#Postgresql-安装" class="headerlink" title="Postgresql 安装"></a>Postgresql <a href="https://www.postgresql.org/download/linux/ubuntu/" target="_blank" rel="noopener">安装</a></h4><blockquote>
-<p>创建文件 /etc/apt/sources.list.d/pgdg.list<br>    <code>touch /etc/apt/sources.list.d/pgdg.list</code><br>增加一行 for the repository<br>    <code>deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main</code><br>Import the repository signing key, and update the package lists<br>    <code>wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-              sudo apt-key add -</code>sudo apt-get update<code>Install</code>sudo apt-get install postgresql-9.6`<br>安装完成后会默认：</p>
-<ul>
-<li>创建名为”postgres”的Linux用户</li>
-<li>创建名为”postgres”、不带密码的默认数据库账号作为数据库管理员</li>
-<li>创建名为”postgres”的表</li>
-</ul>
-</blockquote>
-<h4 id="Postgresql-常用命令"><a href="#Postgresql-常用命令" class="headerlink" title="Postgresql 常用命令"></a>Postgresql <a href="http://www.cnblogs.com/z-sm/archive/2016/07/05/5644165.html" target="_blank" rel="noopener">常用命令</a></h4>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/22/PostgreSQL-入门/#more" rel="contents">
+            <a class="btn" href="/2018/09/23/TOEFL-SPEAKING/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -516,8 +817,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/07/31/Linux-clear-up-the-root-filesystem/" itemprop="url">
-                  Linux--clear up the root filesystem
+                <a class="post-title-link" href="/2018/09/23/Vocabulary-Foreign-Journals-TOEFL-Reading-Listening/" itemprop="url">
+                  Vocabulary: Foreign-Journals_TOEFL-Reading_Listening
                 </a>
               
             
@@ -530,8 +831,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-07-31T00:45:59+08:00" content="2017-07-31">
-              2017-07-31
+            <time itemprop="dateCreated" datetime="2018-09-23T11:51:47+08:00" content="2018-09-23">
+              2018-09-23
             </time>
           </span>
 
@@ -544,8 +845,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/English/" itemprop="url" rel="index">
+                    <span itemprop="name">English</span>
                   </a>
                 </span>
 
@@ -560,8 +861,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/07/31/Linux-clear-up-the-root-filesystem/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/31/Linux-clear-up-the-root-filesystem/" itemprop="commentsCount"></span>
+                <a href="/2018/09/23/Vocabulary-Foreign-Journals-TOEFL-Reading-Listening/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/23/Vocabulary-Foreign-Journals-TOEFL-Reading-Listening/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -585,269 +886,11 @@
 
       
         
-          <h4 id="From-a-Answerer-on-Ask-Ubuntu—-Ubuntu-的根目录-和-usr-分区一定要够大，10–15GB"><a href="#From-a-Answerer-on-Ask-Ubuntu—-Ubuntu-的根目录-和-usr-分区一定要够大，10–15GB" class="headerlink" title="From a Answerer on Ask Ubuntu—-Ubuntu 的根目录/ 和 /usr 分区一定要够大，10–15GB"></a>From a Answerer on <a href="https://askubuntu.com/questions/266825/what-do-i-do-when-my-root-filesystem-is-full" target="_blank" rel="noopener">Ask Ubuntu</a>—-Ubuntu 的根目录/ 和 /usr 分区一定要够大，10–15GB</h4><p>Some likely measures for an overflowing root partition are (based on cases):</p>
-<blockquote>
-<p>1.Core dumps filling up the disk.</p>
-</blockquote>
-<pre><code>*Check with:*
-`find / -xdev -name core -ls -o  -path &quot;/lib*&quot; -prune`
-</code></pre><blockquote>
-<p>2.Unnecessary packages filling up the space.</p>
-</blockquote>
-<p>The following command will remove all automatically installed packages, which aren’t required any more. (Because the dependency which force the installation in the past has been removed.)</p>
-<pre><code>`apt-get autoremove --purge `
-</code></pre><blockquote>
-<p>3.Outdated kernel packages</p>
+          <h3 id="23rd-Sept-2018"><a href="#23rd-Sept-2018" class="headerlink" title="23rd Sept, 2018"></a>23rd Sept, 2018</h3><blockquote>
+<p>track meet(田径运动会)、 parchment(羊皮纸)、 perdominant(adj. 主要的；卓越的；支配的；有力的；有影响的)、 monks(僧侣，隐士)、 scribe(抄记员)、 monastery(修道院)、 palimpsest(重写本)、 auction(拍卖)、 papyrus(莎草纸)、 medieval(中世纪的)、 organisms(生物体，有机体)、 photosynthesis(光合作用)、 chemosynthetic(化学合成的)、 hydrogen sulfide(硫化氢)、 prospective(未来的，预期的)、 gravel(碎石)、 pebble(鹅卵石)、 granules(颗粒)、 gypsum(石膏)、 peculiar(特权；特殊的)、 barrel(枪管)、 deluge(洪水，泛滥；压倒)、 ooze(渗出；泄漏)、 cement(水泥)、 monolithic(整体的；巨石的，庞大的；完全统一的)、 garrison(要塞；卫戍部队)、 utterly(完全地)、 obsession(痴迷，困扰)、 stark( 完全的；荒凉的；刻板的；光秃秃的；朴实的)、 foster(培养，养育)、 predisposed(有倾向性的)、 might(力量，威力，势力)、 subtlety(精妙)、  junior partner(新合伙人)、 esteem(尊敬)、 diffused(散布的，传播的，普及的)、 ritual(仪式；惯例；礼制)、 tundra(冻土层，苔原)、 tropic of Cancer(北回归线)、 tropic of Carpricorn(南回归线)、 alpine(阿尔卑斯山的，高山的)、 rigor(严格；寒颤；酷烈)</p>
 </blockquote>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/31/Linux-clear-up-the-root-filesystem/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/22/Learn-Python-in-Genetic-Alogrithm/" itemprop="url">
-                  Learn Python in Genetic Alogrithm
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-07-22T13:29:11+08:00" content="2017-07-22">
-              2017-07-22
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/07/22/Learn-Python-in-Genetic-Alogrithm/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/22/Learn-Python-in-Genetic-Alogrithm/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Genetic-Alogrithm-with-Python"><a href="#Genetic-Alogrithm-with-Python" class="headerlink" title="Genetic Alogrithm with Python"></a>Genetic Alogrithm with Python</h2><h4 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h4><blockquote>
-<p>random.seed() —- Pseudo-random number generator(生成初始随机数的first “previous” value)</p>
-</blockquote>
-<blockquote>
-<p>把自己写的模块加入到python默认就有的搜索路径中<br>  <code>在dist-packages（即/usr/local/lib/python2.7/dist-packages）添加一个路径文件，如mypkpath.pth,写上你要加入的模块文件所在的目录名称就是了。</code></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/09/Linux服务器上搭建TensorFlow机器学习环境/" itemprop="url">
-                  Linux服务器上搭建TensorFlow机器学习环境
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-06-09T23:55:42+08:00" content="2017-06-09">
-              2017-06-09
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index">
-                    <span itemprop="name">Tech</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/09/Linux服务器上搭建TensorFlow机器学习环境/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/09/Linux服务器上搭建TensorFlow机器学习环境/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Anaconda科学计算环境"><a href="#Anaconda科学计算环境" class="headerlink" title="Anaconda科学计算环境"></a>Anaconda科学计算环境</h3><p>到<a href="https://www.anaconda.com/download/#linux" target="_blank" rel="noopener">官网</a>下载anaconda for linux相应版本（64bit/py3.x）,安装：<br><code>bash Anaconda2-4.1.1-Linux-x86_64.sh</code><br>之后一路“Enter”至“接受许可”，静待安装…，允许写入路径至.bashrc文件（即输入yes）,这样以后在终端中输入python即可直接进入Anaconda的Python版本<br><code>Prepending PATH=/home/ubuntu/anaconda3/bin to PATH in /home/ubuntu/.bashrc</code><br>if <code>Prepending:command not found</code><br>try <code>source ~/.bashrc</code><br>里面包含了Python3机器学习开发所需的基本包（numpy/scipy..）<br>通常需要重启系统生效。<br>查询安装信息：<br><code>$ conda info</code><br>查询当前已经安装的库：<br><code>$ conda list</code><br>安装库：<br><code>$ conda install ***</code><br>更新库：<br><code>$ conda update ***</code></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/09/Linux服务器上搭建TensorFlow机器学习环境/#more" rel="contents">
+            <a class="btn" href="/2018/09/23/Vocabulary-Foreign-Journals-TOEFL-Reading-Listening/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -881,7 +924,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -920,7 +963,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -937,7 +980,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

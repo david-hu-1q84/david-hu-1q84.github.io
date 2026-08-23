@@ -260,8 +260,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/29/WhatCanISay/" itemprop="url">
-                  What can I say？
+                <a class="post-title-link" href="/2018/04/01/Principles-of-Research/" itemprop="url">
+                  Principles of Research
                 </a>
               
             
@@ -274,218 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-29T20:40:26+08:00" content="2016-11-29">
-              2016-11-29
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/29/WhatCanISay/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/29/WhatCanISay/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>我的能力就这么多。我若全心工作，则必然忽略生活；我若用心生活，则必然一事无成；我若两者兼顾，又难免平庸</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/26/Unix-Sockets-API/" itemprop="url">
-                  Unix
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-26T15:58:57+08:00" content="2016-11-26">
-              2016-11-26
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/26/Unix-Sockets-API/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/26/Unix-Sockets-API/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="The-Sockets-Networking-API"><a href="#The-Sockets-Networking-API" class="headerlink" title="The Sockets Networking API"></a>The Sockets Networking API</h2><p><img src="http://ogddv0qu3.bkt.clouddn.com/20141222092146226.jpg" alt="cover"></p>
-<h3 id="C-library-function"><a href="#C-library-function" class="headerlink" title="C library function"></a>C library function</h3><blockquote>
-<ul>
-<li>bzero<br>原型OA：extern void bzero（void *s, int n）;<br>用法：#include &lt;string.h&gt;　　<br>功能：置字节字符串s的前n个字节为零且包括‘\0’。　　<br>说明：bzero无返回值，并且使用strings.h头文件，strings.h曾经是posix标准的一部分，但是在POSIX.1-2001标准里面，这些函数被标记为了遗留函数而不推荐使用。在POSIX.1-2008标准里已经没有这些函数了。推荐使用memset替代bzero。</li>
-<li>memset<br>原型：void <em>memset(void </em>s, int ch, size_t n);　　<br>函数解释：将s中前n个字节替换为ch并返回s；　　<br>memset:作用是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法。　　<br>常见的三种错误　　<br>第一: 搞反了ch 和 n的位置.　　一定要记住 如果要把一个char a[20]清零, 一定是 memset(a, 0, 20)　　而不是 memset(a, 20, 0)　　<br>第二: 过度使用memset, 我想这些程序员可能有某种心理阴影, 他们惧怕未经初始化的内存, 所以他们会写出这样的代码:　　char buffer[20];　　memset(buffer, 0, sizeof((char)*20));　　strcpy(buffer, “123”);　　这里的memset是多余的. 因为这块内存马上就被覆盖了, 清零没有意义.　　<br>第三: 其实这个错误严格来讲不能算用错memset, 但是它经常在使用memset的场合出现</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/12/IRead/" itemprop="url">
-                  Sette Brevi Lezioni di Fisica
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-12T00:42:56+08:00" content="2016-11-12">
-              2016-11-12
+            <time itemprop="dateCreated" datetime="2018-04-01T22:37:48+08:00" content="2018-04-01">
+              2018-04-01
             </time>
           </span>
 
@@ -498,8 +288,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Reading/" itemprop="url" rel="index">
-                    <span itemprop="name">Reading</span>
+                  <a href="/categories/English/" itemprop="url" rel="index">
+                    <span itemprop="name">English</span>
                   </a>
                 </span>
 
@@ -514,8 +304,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/12/IRead/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/12/IRead/" itemprop="commentsCount"></span>
+                <a href="/2018/04/01/Principles-of-Research/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/01/Principles-of-Research/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -539,10 +329,11 @@
 
       
         
-          <p><img src="http://ogddv0qu3.bkt.clouddn.com/%E4%B8%83%E5%A0%82%E6%9E%81%E7%AE%80%E7%89%A9%E7%90%86%E8%AF%BE.jpg" alt="cover"></p>
-<h1 id="七堂极简物理课"><a href="#七堂极简物理课" class="headerlink" title="七堂极简物理课"></a>七堂极简物理课</h1>
+          <p><img src="http://ogddv0qu3.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpg" alt></p>
+<h2 id="Albert-Einstein-‘Principles-of-Research’-for-Max-Planck’s-60th-birthday-1918"><a href="#Albert-Einstein-‘Principles-of-Research’-for-Max-Planck’s-60th-birthday-1918" class="headerlink" title="Albert Einstein: ‘Principles of Research’ - for Max Planck’s 60th birthday - 1918"></a>Albert Einstein: ‘Principles of Research’ - for Max Planck’s 60th birthday - 1918</h2><p><strong>23 April 1918, Berlin, Germany</strong>  </p>
+<p>In the temple of science are many mansions, and various indeed are they that dwell therein and the motives that have led them thither. Many take to science out of a joyful sense of superior intellectual power; science is their own special sport to which they look for vivid experience and the satisfaction of ambition; many others are to be found in the temple who have offered the products of their brains on this altar for purely utilitarian purposes. Were an angel of the Lord to come and drive all the people belonging to these two categories out of the temple, the assemblage would be seriously depleted, but there would still be some men, of both present and past times, left inside. Our Planck is one of them, and that is why we love him.  </p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/12/IRead/#more" rel="contents">
+            <a class="btn" href="/2018/04/01/Principles-of-Research/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -593,8 +384,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/09/Done/" itemprop="url">
-                  Win!
+                <a class="post-title-link" href="/2018/02/09/来也笔试题/" itemprop="url">
+                  来也笔试题
                 </a>
               
             
@@ -607,38 +398,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-09T14:29:28+08:00" content="2016-11-09">
-              2016-11-09
+            <time itemprop="dateCreated" datetime="2018-02-09T22:47:37+08:00" content="2018-02-09">
+              2018-02-09
             </time>
           </span>
 
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Diary/" itemprop="url" rel="index">
-                    <span itemprop="name">Diary</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/09/Done/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/11/09/Done/" itemprop="commentsCount"></span>
+                <a href="/2018/02/09/来也笔试题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/09/来也笔试题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -662,11 +434,146 @@
 
       
         
-          
-            <p><img src="http://ogddv0qu3.bkt.clouddn.com/%E5%A6%AE%E5%A6%AE.jpg" alt="HAPPY"></p>
-<p>咻~<br>搭建博客的艰辛历程总算是告一段落了，花了好长时间，各种问题各种出，也不知道自己当初为什么要作这个死。。。<br>好吧，其实我就是想装个逼！</p>
+          <h3 id="1-操作系统基础题"><a href="#1-操作系统基础题" class="headerlink" title="1.操作系统基础题"></a>1.操作系统基础题</h3><blockquote>
+<p><strong>1）OS通过虚拟内存技术来解决这种“矛盾”。 </strong><br>    通过将部分数据存储在外部磁盘中，在需要的时候进行数据交换（外部磁盘与内存之间），以缓解物理内存不足的问题。<br><strong>4）解释进程与线程的区别： </strong></p>
+<pre><code>+ 进程：cpu分配资源的最小单位，各进程之间资源是不共享的，独立占有的。
++ 线程：cpu调度的最小单位，一个进程可包含多个线程，各线程之间共享同一资源
+</code></pre></blockquote>
+<h3 id="2-语法基础题"><a href="#2-语法基础题" class="headerlink" title="2.语法基础题"></a>2.语法基础题</h3><blockquote>
+<p><strong>4）解释Python的变量作用域查找规则  </strong><br>    Python的变量作用域查找顺序遵从：<br>local（局部）<code>--&gt;</code> enclosing（函数范围）<code>--&gt;</code> global（全局）<code>--&gt;</code> build-in（内建对象）<br><strong>5）解释Python的generator（生成器）的语法行为及适用场合  </strong><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/02/09/来也笔试题/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </p></blockquote></div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/12/29/Dining-Etiquette/" itemprop="url">
+                  Dining Etiquette（西方餐饮礼仪文化）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-12-29T12:39:39+08:00" content="2017-12-29">
+              2017-12-29
+            </time>
+          </span>
 
           
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Non-Tech/" itemprop="url" rel="index">
+                    <span itemprop="name">Non-Tech</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/29/Dining-Etiquette/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/29/Dining-Etiquette/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Ladies-First-女士优先"><a href="#Ladies-First-女士优先" class="headerlink" title="Ladies First(女士优先)"></a>Ladies First(女士优先)</h3><blockquote>
+<p>When you’re having lunch and dinner with a lady, <strong>she is always first</strong>.</p>
+<ul>
+<li>When she sits…<br><img src="http://ogddv0qu3.bkt.clouddn.com/%E9%A4%90%E6%A1%8C%E7%A4%BC%E4%BB%AA1.PNG" alt="ladies first"></li>
+<li>When she orders…<br><img src="http://ogddv0qu3.bkt.clouddn.com/%E9%A4%90%E6%A1%8C%E7%A4%BC%E4%BB%AA2.PNG" alt="ladies first"></li>
+</ul>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/29/Dining-Etiquette/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -714,8 +621,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/11/Love-Ya/" itemprop="url">
-                  Love Ya!
+                <a class="post-title-link" href="/2017/12/07/Anatomy/" itemprop="url">
+                  Anatomy(解剖学)
                 </a>
               
             
@@ -728,8 +635,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T09:40:28+08:00" content="2016-10-11">
-              2016-10-11
+            <time itemprop="dateCreated" datetime="2017-12-07T12:11:00+08:00" content="2017-12-07">
+              2017-12-07
             </time>
           </span>
 
@@ -742,8 +649,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Photo/" itemprop="url" rel="index">
-                    <span itemprop="name">Photo</span>
+                  <a href="/categories/English/" itemprop="url" rel="index">
+                    <span itemprop="name">English</span>
                   </a>
                 </span>
 
@@ -758,8 +665,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/11/Love-Ya/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/10/11/Love-Ya/" itemprop="commentsCount"></span>
+                <a href="/2017/12/07/Anatomy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/07/Anatomy/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -783,10 +690,156 @@
 
       
         
-          
-            <img src="https://gss0.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/b8014a90f603738d5bd12be3b11bb051f919ec5c.jpg" class="[love]">
+          <h3 id="Legal-Terminology"><a href="#Legal-Terminology" class="headerlink" title="Legal Terminology"></a>Legal Terminology</h3><blockquote>
+<p><code>cornea(角膜)</code>: At the front part of the eye</p>
+</blockquote>
+<blockquote>
+<p><code>achilles tendon(跟腱)</code>: At the back of the leg, connecting the calf(小腿肚) to the heel(足跟) bone </p>
+</blockquote>
+<blockquote>
+<p><code>appendix(阑尾)</code>: A tube connected to a pouch called the cecum colon(盲肠)</p>
+</blockquote>
+<blockquote>
+<p><code>adrenal glands(肾上腺)</code>: Above the kidneys</p>
+</blockquote>
+<blockquote>
+<p><code>biceps(二头肌)</code>: Are muscles in the upper arm, between the shoulder and the elbow</p>
+</blockquote>
+<blockquote>
+<p><code>triceps(三头肌)</code>: Are muscles on the back of the upper arm</p>
+</blockquote>
+<blockquote>
+<p><code>quadriceps(四头肌)</code>: Are a muscles group on the front of the thighs(大腿)</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/07/Anatomy/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/12/05/Markdown-Syntax/" itemprop="url">
+                  Markdown Syntax
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-12-05T19:02:24+08:00" content="2017-12-05">
+              2017-12-05
+            </time>
+          </span>
 
           
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tutorial/" itemprop="url" rel="index">
+                    <span itemprop="name">Tutorial</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/05/Markdown-Syntax/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/05/Markdown-Syntax/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Markdown的常用语法"><a href="#Markdown的常用语法" class="headerlink" title="Markdown的常用语法"></a>Markdown的常用语法</h1><blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> Markdown 是一种轻量级标记语言，它用简洁的语法代替排版，使我们专心于码字。它的目标是实现易读易写，成为一种适用于网络的书写语言。同时，Markdown支持嵌入html标签。<br><u><strong>注意</strong>：Markdown使用#、+、*、&gt;等符号来标记， 符号后面必须跟上 至少1个 空格才有效！</u>  </p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/05/Markdown-Syntax/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -817,7 +870,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -856,7 +909,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -873,7 +926,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

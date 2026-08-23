@@ -1,0 +1,1039 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Reinforcement Learning,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2">
+
+
+
+
+
+
+<meta name="description" content="Importance Sampling1.What is Importance Sampling Importance Sampling(IS) is a general technique for estimating properties of a particular distribution $p$, while only having samples generated from a d">
+<meta name="keywords" content="Reinforcement Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RL_Importance_Sampling">
+<meta property="og:url" content="https://david-hu-1q84.github.io/2020/05/26/RL-Importance-Sampling/index.html">
+<meta property="og:site_name" content="Lucy&#39;s Hugo!">
+<meta property="og:description" content="Importance Sampling1.What is Importance Sampling Importance Sampling(IS) is a general technique for estimating properties of a particular distribution $p$, while only having samples generated from a d">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/rlblog_images/IS.jpg">
+<meta property="og:updated_time" content="2026-08-23T15:18:40.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RL_Importance_Sampling">
+<meta name="twitter:description" content="Importance Sampling1.What is Importance Sampling Importance Sampling(IS) is a general technique for estimating properties of a particular distribution $p$, while only having samples generated from a d">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/rlblog_images/IS.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://david-hu-1q84.github.io/2020/05/26/RL-Importance-Sampling/">
+
+
+  <title> RL_Importance_Sampling | Lucy's Hugo! </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lucy's Hugo!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">RECORD & SHARE</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RL_Importance_Sampling
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-05-26T00:00:00+08:00" content="2020-05-26">
+              2020-05-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2020/05/26/RL-Importance-Sampling/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/26/RL-Importance-Sampling/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Importance-Sampling"><a href="#Importance-Sampling" class="headerlink" title="Importance Sampling"></a>Importance Sampling</h2><h4 id="1-What-is-Importance-Sampling"><a href="#1-What-is-Importance-Sampling" class="headerlink" title="1.What is Importance Sampling"></a>1.What is Importance Sampling</h4><p> <strong>Importance Sampling(IS)</strong> is a general technique for estimating properties of a particular distribution $p$, while only having samples generated from a different distribution $q$ than the distribution of interest($p$). </p>
+<p>And actually, <strong>IS</strong> is a variant of <strong>Monte Carlo approximation</strong>. In Monte Carlo approximation, we were extimating the expected value of a random variable $X$ by this sample mean sum: </p>
+<p>But, there is a big assumption that we can efficiently draw samples from the true distribution $p$ of this random variable $X$. What if we can’t do that? Can we use some alternative distribution like $q$ and use the samples drawing from $q$ to correct the fact that we were drawing samples from the wrong distribution or get a better estimation than its true distribution $p$? There is where Importance sampling comes for.</p>
+<p>In Importance Sampling, where $p$ is the true distribution of random variable $X$, and $q$ which is called <strong>proposal distribution</strong> that we use to sampling, and $q$ satisfied <strong>absolute continuity</strong> that $\forall q(pdfs), s.t. q(x) = 0 \rightarrow p(x) = 0$:</p>
+<p>Finally, an unbiased estimator of the true expectation(Monte Carlo estimator is unbiased).</p>
+<p>$w(x)$ is called the <strong>importance weight</strong> , it will give more weight to the values that may appear more possible under its true distribution. And IS is worked no matter whether the $p$ is normalized, something like $p(x) = \frac{h(x)}{Z}$ or not.</p>
+<p>Now, $E_p[X=1] = 1 = \sum\limits_{x}\frac{h(x)}{Z}$, we can get:</p>
+<p>So, finally,</p>
+<h4 id="2-A-bad-choice-of-q-makes-thing-worse"><a href="#2-A-bad-choice-of-q-makes-thing-worse" class="headerlink" title="2. A bad choice of $q$ makes thing worse."></a>2. A bad choice of $q$ makes thing worse.</h4><p> <strong>Moral: Choose $q(x)$ large where $|x|p(x)$ large.</strong></p>
+<p>Importance sampling is a <strong>variance reduction</strong> technique that can be used in the <strong>Monte Carlo method</strong>. The idea behind importance sampling is that <em><strong>certain values of the input random variables in a simulation have more impact on the parameter being estimated than others. If these “important” values are emphasized by sampling more frequently, then the estimator variance can be reduced</strong></em>. Hence, the basic methodology in importance sampling is <em><strong>to choose a distribution which “encourages” the important values</strong></em>. This use of “biased” distributions will result in a biased estimator if it is applied directly in the simulation. However, the simulation outputs are weighted to correct for the use of the biased distribution, and this ensures that the new importance sampling estimator is unbiased. The weight is given by the <strong>likelihood ratio</strong> , that is, the Radon–Nikodym derivative of the true underlying distribution with respect to the biased simulation distribution.(From Wikipedia)</p>
+<p>The fundamental issue in implementing importance sampling simulation is the choice of the biased distribution which encourages the important regions of the input variables. Choosing or designing a good biased distribution is the “art” of importance sampling. The rewards for a good distribution can be <strong>huge run-time savings</strong> ; the penalty for a bad distribution can be longer run times than for a general Monte Carlo simulation without importance sampling.(From Wikipedia)</p>
+<p>Now, let $I = \frac{1}{n}\sum\limits_{i=1}^{n}x_iw(x_i)$, the variance of $I$, </p>
+<p>a litte bit different from the standard Monte Carlo variance:</p>
+<p>So this is how you can improve the expected error you can lower the expected error of your estimator by reducing this variance, because the mean square error is $mse = bias^2 + var$. It could be worse if you made a bad choice of $q$, a high variance made it hard to learn or converge. Also it could be much samller if you choose a good $q$. Often, people try to make $q$ as close to $p$ as possible.<br>For example:<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/rlblog_images/IS.jpg" alt><br>There are two proposal distributions $q$ and $T$ that we can use to estimate the expect value of $X$ which is under its true distribution $p$. If we choose to use $q$ distribution, we will get a high variance because under the $q$ distribution in most time the samples we get have a very small importance weights that don’t contribute to the estimator much, and occasionally it will get a very large importance weight when the sample appears in the middle part, and that makes it struggle to estimate from $q$ distribution. But for $T$, because in most time, we will get the samples from its middle part where have a relatively smooth importance weights that eventually get a much smaller variance than $q$, and that makes it converge much more quickly than $q$.</p>
+<p>There is an optimal equation to choose the <strong>proposal distribution</strong> $q$:<br>Let $\mu = E_p[|X|] = $, if we choose a $q$ that: $q(x) = \frac{p(x)|x|}{\mu}$, we can get a zero-variance estimator.</p>
+<h4 id="3-Applications"><a href="#3-Applications" class="headerlink" title="3. Applications"></a>3. Applications</h4><p>Such methods are frequently used to estimate posterior densities(后验密度估计) or expectations in state(状态期望值) and/or parameter estimation problems in probabilistic models(概率模型中的参数估计问题) that are too hard to treat analytically, for example in Bayesian networks.</p>
+<h4 id="4-Conventional-biasing-methods"><a href="#4-Conventional-biasing-methods" class="headerlink" title="4. Conventional biasing methods"></a>4. Conventional biasing methods</h4><p> <strong>Sacling:</strong><br>Shifting probability mass into the event region $X\geq t$ by positive scaling of the random variable $X$, with a number greater than unity has the effect of increasing the variance (mean also) of the density function. This results in a heavier tail of the density, leading to an increase in the event probability. However, while scaling shifts probability mass into the desired event region, it also pushes mass into the complementary region $X {&lt;} t $, which is undesirable. </p>
+<p> <strong>Translation:</strong><br>Another simple and effective biasing technique employs translation of the density function (and hence random variable) to place much of its probability mass in the rare event region. Translation does not suffer from a dimensionality effect and has been successfully used in several applications relating to simulation of digital communication systems. It often provides better simulation gains than scaling. In biasing by translation, the simulation density is given by</p>
+<p>where $c$ is the amount of shift and is to be chosen to minimize the variance of the importance sampling estimator.</p>
+<h4 id="5-Evaluation-of-importance-sampling"><a href="#5-Evaluation-of-importance-sampling" class="headerlink" title="5. Evaluation of importance sampling"></a>5. Evaluation of importance sampling</h4><p>In order to identify successful importance sampling techniques, it is useful to be able to quantify the run-time savings due to the use of the importance sampling approach. The performance measure commonly used is $\sigma _{MC}^{2}/\sigma _{IS}^{2}$, and this can be interpreted as the speed-up factor by which the importance sampling estimator achieves the same precision as the MC estimator.</p>
+<h4 id="6-Importance-Sampling-in-Deep-Reinforcement-Learning"><a href="#6-Importance-Sampling-in-Deep-Reinforcement-Learning" class="headerlink" title="6. Importance Sampling in Deep Reinforcement Learning"></a>6. Importance Sampling in Deep Reinforcement Learning</h4><p>We often see this term in reinforcement learning paper, like the “Prioritized experience replay”, “PPO”,etc. And now, we’re going to explore why they use IS, and how they use it.</p>
+<p><strong>Prioritized Experience Replay</strong><br>The importance weight here is:</p>
+<p>There are two excellent explanation about the Importace Sampling Correction appears in PER:</p>
+<ul>
+<li><a href="https://datascience.stackexchange.com/questions/32873/prioritized-replay-what-does-importance-sampling-really-do" target="_blank" rel="noopener">Prioritized Replay, what does Importance Sampling really do?</a></li>
+<li><a href="https://danieltakeshi.github.io/2019/07/14/per/" target="_blank" rel="noopener">Understanding Prioritized Experience Replay</a></li>
+</ul>
+<p><strong>TL;DR</strong> the importance sampling in PER is to correct the over-sampling with respect to the uniform distribution.</p>
+<p>In paper Prioritized Experience Replay, it said: “In particular, we propose to more frequently replay transitions with high expected learning progress, as measured by the magnitude of their temporal-difference (TD) error. This prioritization can lead to a loss of diversity, which we alleviate with stochastic prioritization, and introduce bias, which we correct with importance sampling. “</p>
+<p>And DeepMind describes why we need an Importace Sampling Correction:</p>
+<blockquote>
+<p>The estimation of the expected value with stochastic updates relies on those updates corresponding to the same distribution as its expectation. Prioritized replay introduces bias because it changes this distribution in an uncontrolled fashion, and therefore changes the solution that the estimates will converge to (even if the policy and state distribution are fixed). We can correct this bias by using importance-sampling (IS) weights.</p>
+</blockquote>
+<p>Now the loss we want to minimize in DQN is: </p>
+<p>Let $X = (r + \lambda max_{a’}Q(s’, a’;\theta_i^{-}) - Q(s_i, a_i;\theta_i))^2$ which should under its “true” distribution $U(D)$ - the Uniform Distribution($1/N$), but now the samples $X$ we get are under the stochastic prioritization distribution $P$, so we need the Importance Sampling Correction to down-weight those samples with high prority which has a higher $P(i)$ to be choose to eliminate the bias it brings. Incidentally, the $\beta$ here is a kind of bias-variance trade-off method, as $\beta$ grows from $\beta_0$ to $1$, the bias is gradually eliminated, which means IS is more important near convergence.</p>
+<p><strong><a href="https://www.quora.com/Why-doesn-t-DQN-use-importance-sampling-Dont-we-always-use-this-method-to-correct-the-sampling-error-produced-by-the-off-policy/answer/James-MacGlashan" target="_blank" rel="noopener">But why we don’t use Importance sampling in DQN?</a></strong><br>The important property here is the sampling Q-learning does is over the <strong>probability distribution of the environment state transitions</strong> , not over the <strong>policy distribution</strong>. Consequently, we don’t need to correct for different policy distributions!</p>
+<h3 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a><em>REFERENCES</em></h3><p> <strong>Wikipedia:</strong></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Importance_sampling" target="_blank" rel="noopener">Importance Sampling</a></li>
+</ul>
+<p><strong>Videos:</strong></p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=V8f8ueBc9sY" target="_blank" rel="noopener">An introduction to importance sampling</a></li>
+<li><a href="https://www.youtube.com/watch?v=F5PdIQxMA28" target="_blank" rel="noopener">An introduction to importance sampling - optimal importance distributions</a></li>
+<li><a href="https://www.youtube.com/watch?v=S3LAOZxGcnk" target="_blank" rel="noopener">(ML 17.5) Importance sampling - introduction</a></li>
+<li><a href="https://www.youtube.com/watch?v=3Mw6ivkDVZc" target="_blank" rel="noopener">(ML 17.6) Importance sampling - intuition</a></li>
+<li><a href="https://www.youtube.com/watch?v=gYvlnu5AAzE" target="_blank" rel="noopener">(ML 17.7) Importance sampling without normalization constants</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Reinforcement-Learning/" rel="tag">#Reinforcement Learning</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/26/RL-OpenAI-Gym-Tutorial/" rel="next" title="RL_OpenAI_Gym_Tutorial">
+                <i class="fa fa-chevron-left"></i> RL_OpenAI_Gym_Tutorial
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/02/TinyWebServer-小白视角/" rel="prev" title="小白视角：一文读懂社长的TinyWebServer">
+                小白视角：一文读懂社长的TinyWebServer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/Elon-Musk.jpg" alt="Hugo">
+          <p class="site-author-name" itemprop="name">Hugo</p>
+          <p class="site-description motion-element" itemprop="description">ORDINARY PEOPLE COULD CHOOSE TO BE EXTRAORDINARY!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Huixxi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/uestc-hugo/" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="uestc.hugo@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/Hugo13438832589" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Importance-Sampling"><span class="nav-number">1.</span> <span class="nav-text">Importance Sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-What-is-Importance-Sampling"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.What is Importance Sampling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-A-bad-choice-of-q-makes-thing-worse"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. A bad choice of $q$ makes thing worse.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Applications"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. Applications</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Conventional-biasing-methods"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. Conventional biasing methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Evaluation-of-importance-sampling"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. Evaluation of importance sampling</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Importance-Sampling-in-Deep-Reinforcement-Learning"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. Importance Sampling in Deep Reinforcement Learning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REFERENCES"><span class="nav-number">1.1.</span> <span class="nav-text">REFERENCES</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hugo-818';
+      var disqus_identifier = '2020/05/26/RL-Importance-Sampling/';
+      var disqus_title = "RL_Importance_Sampling";
+      var disqus_url = 'https://david-hu-1q84.github.io/2020/05/26/RL-Importance-Sampling/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+<style>
+#cw-root { position: fixed; right: 20px; bottom: 20px; z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+.cw-fab { width: 56px; height: 56px; border-radius: 50%; border: none; background: #111; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.18); transition: transform .15s ease, background .15s ease; }
+.cw-fab:hover { transform: scale(1.06); background: #333; }
+.cw-fab .cw-icon-close { display: none; }
+#cw-root.cw-open .cw-fab .cw-icon-chat { display: none; }
+#cw-root.cw-open .cw-fab .cw-icon-close { display: block; }
+
+.cw-panel { position: absolute; right: 0; bottom: 72px; width: 380px; max-width: calc(100vw - 32px); height: 560px; max-height: calc(100vh - 120px); background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.16); display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(12px) scale(.98); pointer-events: none; transition: opacity .18s ease, transform .18s ease; }
+#cw-root.cw-open .cw-panel { opacity: 1; transform: none; pointer-events: auto; }
+
+.cw-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #eee; }
+.cw-title { font-size: 15px; font-weight: 600; color: #111; }
+.cw-sub { font-size: 12px; color: #999; margin-top: 1px; }
+.cw-header-btns { display: flex; gap: 6px; }
+.cw-header-btns button { border: 1px solid #e5e5e5; background: #fff; color: #555; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+.cw-header-btns button:hover { background: #f5f5f5; }
+
+.cw-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.cw-msg { display: flex; }
+.cw-msg.user { justify-content: flex-end; }
+.cw-bubble { max-width: 86%; padding: 10px 13px; border-radius: 12px; font-size: 14px; line-height: 1.6; word-break: break-word; }
+.cw-msg.user .cw-bubble { background: #111; color: #fff; border-bottom-right-radius: 4px; }
+.cw-msg.assistant .cw-bubble { background: #f5f5f5; color: #222; border-bottom-left-radius: 4px; }
+.cw-msg.error .cw-bubble { background: #fef2f2; color: #b91c1c; }
+
+.cw-bubble p { margin: 0 0 .5em; }
+.cw-bubble p:last-child { margin-bottom: 0; }
+.cw-bubble pre { background: #0d1117; color: #e6edf3; padding: 12px; border-radius: 8px; overflow-x: auto; margin: .5em 0; }
+.cw-bubble code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.cw-bubble :not(pre) > code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; }
+.cw-msg.user .cw-bubble :not(pre) > code { background: rgba(255,255,255,.2); }
+.cw-bubble table { border-collapse: collapse; margin: .5em 0; }
+.cw-bubble th, .cw-bubble td { border: 1px solid #ddd; padding: 4px 8px; font-size: 13px; }
+.cw-bubble img { max-width: 100%; border-radius: 6px; }
+
+.cw-streaming { white-space: pre-wrap; word-break: break-word; }
+.cw-streaming::after { content: '▍'; color: #888; animation: cw-blink 1s steps(2) infinite; }
+@keyframes cw-blink { 50% { opacity: 0; } }
+
+.cw-composer { display: flex; align-items: flex-end; gap: 8px; padding: 12px; border-top: 1px solid #eee; }
+.cw-composer textarea { flex: 1; resize: none; border: 1px solid #e5e5e5; border-radius: 10px; padding: 9px 12px; font-size: 14px; line-height: 1.5; max-height: 120px; outline: none; font-family: inherit; }
+.cw-composer textarea:focus { border-color: #111; }
+.cw-send, .cw-stop { border: none; border-radius: 10px; padding: 9px 14px; font-size: 13px; cursor: pointer; }
+.cw-send { background: #111; color: #fff; }
+.cw-send:disabled { background: #ccc; cursor: not-allowed; }
+.cw-stop { background: #f5f5f5; color: #b91c1c; }
+.cw-hidden { display: none !important; }
+
+@media (max-width: 480px) { .cw-panel { right: -4px; } }
+</style>
+
+<div id="cw-root" aria-hidden="true">
+  <button id="cw-fab" class="cw-fab" title="打开 AI 助手" aria-label="打开 AI 助手">
+    <svg class="cw-icon-chat" viewbox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg class="cw-icon-close" viewbox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="cw-panel">
+    <header class="cw-header">
+      <div>
+        <div class="cw-title" id="cw-title">AI 助手</div>
+        <div class="cw-sub" id="cw-sub"></div>
+      </div>
+      <div class="cw-header-btns">
+        <button id="cw-clear" title="清空对话">清空</button>
+        <button id="cw-close" title="关闭">✕</button>
+      </div>
+    </header>
+    <div id="cw-messages" class="cw-messages"></div>
+    <div class="cw-composer">
+      <textarea id="cw-input" rows="1" placeholder="输入消息，Enter 发送，Shift+Enter 换行"></textarea>
+      <button id="cw-stop" class="cw-stop cw-hidden">停止</button>
+      <button id="cw-send" class="cw-send">发送</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.__CHAT_CONFIG__ = {
+  apiBase: "http://localhost:11434/v1",
+  model: "llama3",
+  key: "",
+  title: "AI 助手",
+  welcome: "你好，我是跑在本机 Ollama 的 llama3 模型，有什么可以帮你？",
+  systemPrompt: ""
+};
+</script>
+
+<script>
+(function () {
+  var cfg = window.__CHAT_CONFIG__ || {};
+  var root = document.getElementById('cw-root');
+  var fab = document.getElementById('cw-fab');
+  var messagesEl = document.getElementById('cw-messages');
+  var inputEl = document.getElementById('cw-input');
+  var sendBtn = document.getElementById('cw-send');
+  var stopBtn = document.getElementById('cw-stop');
+  var clearBtn = document.getElementById('cw-clear');
+  var closeBtn = document.getElementById('cw-close');
+
+  var history = [];
+  var streaming = false;
+  var controller = null;
+
+  document.getElementById('cw-title').textContent = cfg.title || 'AI 助手';
+  document.getElementById('cw-sub').textContent = cfg.model || '';
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderMarkdown(text) {
+    if (typeof marked === 'undefined') return escapeHtml(text).replace(/\n/g, '<br>');
+    var token = 'X' + Math.random().toString(36).slice(2) + 'X';
+    var math = [];
+
+    text = text.replace(/\$\$([\s\S]+?)\$\$/g, function (m, t) {
+      math.push(['display', t.trim()]);
+      return token + 'M' + (math.length - 1) + token;
+    });
+    text = text.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, function (m, p, t) {
+      math.push(['inline', t.trim()]);
+      return p + token + 'M' + (math.length - 1) + token;
+    });
+
+    var html = marked.parse(text);
+
+    html = html.replace(new RegExp(token + 'M(\\d+)' + token, 'g'), function (m, i) {
+      var item = math[+i];
+      if (typeof katex === 'undefined') return '<code>' + escapeHtml(item[1]) + '</code>';
+      try {
+        return katex.renderToString(item[1], { displayMode: item[0] === 'display', throwOnError: false });
+      } catch (e) {
+        return '<code>' + escapeHtml(item[1]) + '</code>';
+      }
+    });
+    return html;
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addMessage(role, content, opts) {
+    opts = opts || {};
+    var msg = document.createElement('div');
+    msg.className = 'cw-msg ' + role;
+    var bubble = document.createElement('div');
+    bubble.className = 'cw-bubble';
+    if (opts.raw) {
+      var streamEl = document.createElement('div');
+      streamEl.className = 'cw-streaming';
+      streamEl.textContent = content;
+      bubble.appendChild(streamEl);
+    } else {
+      bubble.innerHTML = renderMarkdown(content);
+    }
+    msg.appendChild(bubble);
+    messagesEl.appendChild(msg);
+    scrollToBottom();
+    return msg;
+  }
+
+  function addWelcome() {
+    if (cfg.welcome) addMessage('assistant', cfg.welcome);
+  }
+
+  function clearConversation() {
+    if (streaming) return;
+    history = [];
+    messagesEl.innerHTML = '';
+    addWelcome();
+  }
+
+  function buildRequestBody() {
+    var messages = [];
+    if (cfg.systemPrompt) messages.push({ role: 'system', content: cfg.systemPrompt });
+    messages = messages.concat(history);
+    return { model: cfg.model, stream: true, messages: messages };
+  }
+
+  function setStreaming(on) {
+    streaming = on;
+    sendBtn.disabled = on;
+    sendBtn.classList.toggle('cw-hidden', on);
+    stopBtn.classList.toggle('cw-hidden', !on);
+    inputEl.disabled = on;
+  }
+
+  function send() {
+    if (streaming) return;
+    var text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = '';
+    autoGrow();
+
+    history.push({ role: 'user', content: text });
+    addMessage('user', text);
+
+    var assistantMsg = addMessage('assistant', '', { raw: true });
+    var streamEl = assistantMsg.querySelector('.cw-streaming');
+    var bubble = assistantMsg.querySelector('.cw-bubble');
+    var raw = '';
+
+    controller = new AbortController();
+    setStreaming(true);
+
+    var headers = { 'Content-Type': 'application/json' };
+    if (cfg.key) headers['X-Chat-Key'] = cfg.key;
+
+    fetch(cfg.apiBase + '/chat/completions', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: headers,
+      body: JSON.stringify(buildRequestBody())
+    }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = '';
+
+      function pump() {
+        return reader.read().then(function (result) {
+          if (result.done) return;
+          buffer += decoder.decode(result.value, { stream: true });
+          var lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          lines.forEach(function (line) {
+            var t = line.trim();
+            if (t.indexOf('data:') !== 0) return;
+            var payload = t.slice(5).trim();
+            if (payload === '[DONE]') return;
+            try {
+              var json = JSON.parse(payload);
+              var delta = json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content;
+              if (delta) {
+                raw += delta;
+                streamEl.textContent = raw;
+                scrollToBottom();
+              }
+            } catch (e) {}
+          });
+          return pump();
+        });
+      }
+
+      return pump().then(function () {
+        if (!raw) raw = '（无回复）';
+        history.push({ role: 'assistant', content: raw });
+        streamEl.remove();
+        bubble.innerHTML = renderMarkdown(raw);
+        scrollToBottom();
+        setStreaming(false);
+      });
+    }).catch(function (err) {
+      if (err.name === 'AbortError') {
+        if (raw) {
+          history.push({ role: 'assistant', content: raw });
+          streamEl.remove();
+          bubble.innerHTML = renderMarkdown(raw);
+        } else {
+          assistantMsg.remove();
+        }
+      } else {
+        assistantMsg.remove();
+        addMessage('error', '请求失败：' + err.message + '。请检查服务器与 CORS 配置。');
+      }
+      setStreaming(false);
+    });
+  }
+
+  function stop() {
+    if (controller) controller.abort();
+  }
+
+  function autoGrow() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
+  }
+
+  fab.addEventListener('click', function () {
+    var open = root.classList.toggle('cw-open');
+    root.setAttribute('aria-hidden', String(!open));
+    if (open) inputEl.focus();
+  });
+  closeBtn.addEventListener('click', function () {
+    root.classList.remove('cw-open');
+    root.setAttribute('aria-hidden', 'true');
+  });
+  clearBtn.addEventListener('click', clearConversation);
+  sendBtn.addEventListener('click', send);
+  stopBtn.addEventListener('click', stop);
+  inputEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+  inputEl.addEventListener('input', autoGrow);
+
+  addWelcome();
+})();
+</script>
+
+
+
+</body>
+</html>

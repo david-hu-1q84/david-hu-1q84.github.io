@@ -1,0 +1,1170 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="System Design,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2">
+
+
+
+
+
+
+<meta name="description" content="System DesignIn a system design interview, you should at least do the following 4 tips:  Ask good questions: what feature to work on? how much to scale?  To figure out which feature he cares about and">
+<meta name="keywords" content="System Design">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic System Design">
+<meta property="og:url" content="https://david-hu-1q84.github.io/2020/07/13/Basic-System-Design/index.html">
+<meta property="og:site_name" content="Lucy&#39;s Hugo!">
+<meta property="og:description" content="System DesignIn a system design interview, you should at least do the following 4 tips:  Ask good questions: what feature to work on? how much to scale?  To figure out which feature he cares about and">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/hash_ring.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/strong-consistency.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/eventual-consistency.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/load_balancing.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/load_balancer.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/mapreduce.png">
+<meta property="og:updated_time" content="2026-08-23T15:18:40.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Basic System Design">
+<meta name="twitter:description" content="System DesignIn a system design interview, you should at least do the following 4 tips:  Ask good questions: what feature to work on? how much to scale?  To figure out which feature he cares about and">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/hash_ring.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://david-hu-1q84.github.io/2020/07/13/Basic-System-Design/">
+
+
+  <title> Basic System Design | Lucy's Hugo! </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lucy's Hugo!</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">RECORD & SHARE</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Basic System Design
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2020-07-13T00:00:00+08:00" content="2020-07-13">
+              2020-07-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2020/07/13/Basic-System-Design/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/07/13/Basic-System-Design/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="System-Design"><a href="#System-Design" class="headerlink" title="System Design"></a>System Design</h1><p>In a system design interview, you should at least do the following 4 tips:</p>
+<ul>
+<li>Ask good questions: what feature to work on? how much to scale? <ul>
+<li>To figure out which feature he cares about and which feature he doesn’t, and make sure the finally feature set is small, then go deep into this feature set.</li>
+<li>How much data you need to store in the database, how many requests per second(QPS) you need to handle, and what kind of latency is expected.</li>
+</ul>
+</li>
+<li>Don’t use buzzwords.</li>
+<li>Clear and organized thinking.</li>
+<li>Dirve discussions(80-20 rule): you should be talking 80% of the time and the interviewer should be talking 20% of the time.</li>
+</ul>
+<h2 id="The-basic-features-which-is-required-in-a-system-design"><a href="#The-basic-features-which-is-required-in-a-system-design" class="headerlink" title="The basic features which is required in a system design."></a>The basic features which is required in a system design.</h2><ul>
+<li><strong>Features</strong> : figure out what features does the interviewer need</li>
+<li><strong>Define APIs</strong></li>
+<li><strong>Availability</strong> : when a power cut or your datacenter goes down, if your service is still available. </li>
+<li><strong>Latency Performance</strong></li>
+<li><strong>Scalability</strong> : it going to be scaled as we add more users or more requests</li>
+<li><strong>Durability</strong> : data can be stored in a database securely and data is not lost and data is not compromised.</li>
+<li><strong>Class Diagram</strong> (Object Oriented Principles)</li>
+<li><strong>Security &amp; Privacy</strong></li>
+<li><strong>Cost Effective</strong></li>
+</ul>
+<h2 id="Important-concepts-that-you-need-to-know"><a href="#Important-concepts-that-you-need-to-know" class="headerlink" title="Important concepts that you need to know."></a>Important concepts that you need to know.</h2><h3 id="Vertical-vs-Horizontal-Scaling"><a href="#Vertical-vs-Horizontal-Scaling" class="headerlink" title="Vertical vs Horizontal Scaling"></a><strong>Vertical vs Horizontal Scaling</strong></h3><ul>
+<li><strong>Vertial</strong> : add more memory, CPU, and hard drive to an existing host (single point failure)</li>
+<li><strong>Horizontal</strong> : keep the host small and add more hosts (distributed system)</li>
+</ul>
+<h3 id="CAP-Theorem"><a href="#CAP-Theorem" class="headerlink" title="CAP Theorem"></a><strong>CAP Theorem</strong></h3><ul>
+<li>CAP Theorem is a concept that a distributed database system can only have 2 of the 3: Consistency, Availability and Partition Tolerance.</li>
+<li><strong>Consistency</strong> (一致性): all nodes see the same data at the same time. Simply put, performing a read operation will return the value of the most recent write operation causing all nodes to return the same data.</li>
+<li><strong>Availability</strong> (可用性): every request should gets a response on success/failure, regardless of the state of any individual node in the system.</li>
+<li><strong>Partion Tolerance</strong> (分区容限): can sustain any amount of network failure that doesn’t result in a failure of the entire network.</li>
+</ul>
+<h3 id="ACID-vs-BASE"><a href="#ACID-vs-BASE" class="headerlink" title="ACID vs BASE"></a><strong>ACID vs BASE</strong></h3><ul>
+<li><strong>ACID</strong> : Atomicity, Consistency(Strong), Isolation, and Durablity, which is used for relational database.</li>
+<li><strong>BASE</strong> : Basically Available, Soft State, and Eventual Consistency, which is used for NoSQL database.</li>
+</ul>
+<h3 id="Partitioning-Sharding-Data"><a href="#Partitioning-Sharding-Data" class="headerlink" title="Partitioning / Sharding Data"></a><strong>Partitioning / Sharding Data</strong></h3><p> <strong>Database Sharding</strong><br>A database shard is a horizontal partition of data in a database or search engine. Each individual partition is referred to as a shard or database shard. Each shard is held on a separate database server instance, to spread load.</p>
+<p>Some data within a database remains present in all shards,[notes 1] but some appears only in a single shard. Each shard (or server) acts as the single source for this subset of data.</p>
+<p>In Sharding, one’s data is broken into two or more smaller chunks, called <em>logical shards</em>. The logical shards are then distributed across separate database nodes, referred to as physical shards.</p>
+<p><strong>Advantages of Sharding</strong></p>
+<ul>
+<li>High Availability</li>
+<li>Faster queries response</li>
+<li>More write bandwidth(write data in parallel)</li>
+<li>Scaling out</li>
+</ul>
+<p><strong>Disadvantages of Sharding</strong></p>
+<ul>
+<li>More complexity</li>
+<li>A heavier reliance on the interconnection between servers.</li>
+<li>When more than one shard must be searched, increased latency when querying.</li>
+<li>Rebalancing data when <em>database hotspot</em>.</li>
+</ul>
+<p><strong>Types of Sharding Architecture</strong></p>
+<ul>
+<li>Key Based Sharding: by customer ID number, client application IP address, Country Zip code, etc.</li>
+<li>Range Based Sharding: sharding the data based on the range of given values.</li>
+<li>Directory Based Sharding: maintain a static lookup table which used to keep track of which shard holds which data..</li>
+</ul>
+<h3 id="Consistent-Hashing"><a href="#Consistent-Hashing" class="headerlink" title="Consistent Hashing"></a><strong>Consistent Hashing</strong></h3><p> <strong>Distributed Hashing</strong><br>Use a hash table to distribute the requests to different servers: server = hash(key) modulo N (N = #servers).</p>
+<p><strong>Rehashing</strong><br>When a server is crashed, the number of servers N = N - 1, then, all the requests should be rehashed, the server location for almost all requests changed, which will increase the load on origin in case of caching servers as there will be <strong>cache miss</strong> of keys and all of them needs to be rehashed.</p>
+<p><strong>Consistent Hashing</strong><br>To solve the problem of rehashing, consistent hashing provides a distribution scheme which does not directly depend on the number of servers. All the requests and the servers are hashed by the same hash function to a abstract circle range, called <strong>hash ring</strong>. This allows servers and objects to scale without affecting the overall system.<br><img src="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/hash_ring.png" alt></p>
+<p>To evenly distribute the load among servers when a server is added or removed, it creates a fixed number of replicas(known as virtual nodes by using several hash functions) of each server and distributed it along the circle. </p>
+<h3 id="Optimistic-vs-Pessimistic-Locking"><a href="#Optimistic-vs-Pessimistic-Locking" class="headerlink" title="Optimistic vs Pessimistic Locking"></a><strong>Optimistic vs Pessimistic Locking</strong></h3><ul>
+<li>Optimistic Locking: No locking, check before you commit the transaction, if the version number of that data is different before and after, just rollback and do the operate again.</li>
+<li>Pessimistic Locking: Lock the data beforehand until you commit the transaction.</li>
+</ul>
+<h3 id="Strong-vs-Eventual-Consistency"><a href="#Strong-vs-Eventual-Consistency" class="headerlink" title="Strong vs Eventual Consistency"></a><strong>Strong vs Eventual Consistency</strong></h3><ul>
+<li>Strong consistency is the consistency in CAP.<br><img src="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/strong-consistency.png" alt></li>
+<li>Eventual consistency provides higher Availability, like the famous DNS.<br><img src="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/eventual-consistency.png" alt></li>
+</ul>
+<h3 id="Relational-DB-vs-NoSQL-DB"><a href="#Relational-DB-vs-NoSQL-DB" class="headerlink" title="Relational DB vs NoSQL DB"></a><strong>Relational DB vs NoSQL DB</strong></h3><ul>
+<li>Relational DB provides all these nice ACID properties.</li>
+<li>NoSQL DB provides scales a little bit better and higher availability.</li>
+</ul>
+<h3 id="Types-of-NoSQL"><a href="#Types-of-NoSQL" class="headerlink" title="Types of NoSQL"></a><strong>Types of NoSQL</strong></h3><ul>
+<li>Key Value</li>
+<li>Wide Column</li>
+<li>Document Based: to store semi-structured data, XML.. </li>
+<li>Graph Based</li>
+</ul>
+<h3 id="Caching"><a href="#Caching" class="headerlink" title="Caching"></a><strong>Caching</strong></h3><ul>
+<li>Caching <strong>improves latency</strong> and can reduce the load on your servers and databases.</li>
+<li>Every node has its own caching so the cache data is not shared between nodes. </li>
+<li>Cache can’t be the source of truth; Cache data has to be pretty small(keep the data in memory). </li>
+</ul>
+<p>Caching can be done at different level. </p>
+<ul>
+<li>Client Caching</li>
+<li>CDN Caching</li>
+<li>Web Server Caching</li>
+<li>Database Caching</li>
+<li>Application Caching: <strong>In-memory key-value</strong> store like <em>Memcached</em> and <em>Redis</em><ul>
+<li>Caching Database Queries: whenever you query your database, your store the result dataset in the cache.</li>
+<li>Caching Objects: store the data as an object as you do in your application code</li>
+</ul>
+</li>
+</ul>
+<p><strong>Cache-Invalidation</strong> Methods: </p>
+<ul>
+<li><strong>Cache-Aside</strong> : for <strong>read-heavy workloads</strong> , application checks the cache first, if cache-hit, return the result, if cache-miss, checks the data store.</li>
+<li><strong>Read-Through</strong> : for <strong>read-heavy workloads</strong> , similiar as cache-aside</li>
+<li><strong>Write-Through</strong> : an application uses the cache as the main data source to <em>read</em> and <em>write</em>. Cache sits between application and data store. The cache is responsible for reading and writing to the database. So that data in the cache is not stale.</li>
+<li><strong>Write-Behind (Write-Back)</strong> : for <strong>write-heavy workloads</strong> , data is first written to the cache and then asynchronously data is updated to the data store, improving write performance.</li>
+<li><strong>Refresh-ahead</strong></li>
+</ul>
+<h3 id="Message-Queue"><a href="#Message-Queue" class="headerlink" title="Message Queue"></a><strong>Message Queue</strong></h3><h3 id="Microservices"><a href="#Microservices" class="headerlink" title="Microservices"></a><strong>Microservices</strong></h3><p>Microservices are small, focused on doing one thing well and autonomous services that work together.</p>
+<h3 id="Data-center-Racks-Hosts"><a href="#Data-center-Racks-Hosts" class="headerlink" title="Data center/Racks/Hosts"></a><strong>Data center/Racks/Hosts</strong></h3><h3 id="Limited-Recources-CPU-Memory-Hard-Drive-Netword-Bandwidth"><a href="#Limited-Recources-CPU-Memory-Hard-Drive-Netword-Bandwidth" class="headerlink" title="Limited Recources: CPU/Memory/Hard Drive/Netword Bandwidth"></a><strong>Limited Recources: CPU/Memory/Hard Drive/Netword Bandwidth</strong></h3><h3 id="Random-vs-Sequential-Read-Write-on-the-Disk"><a href="#Random-vs-Sequential-Read-Write-on-the-Disk" class="headerlink" title="Random vs Sequential Read/Write on the Disk"></a><strong>Random vs Sequential Read/Write on the Disk</strong></h3><h3 id="Http-vs-Http2-vs-WebSockets"><a href="#Http-vs-Http2-vs-WebSockets" class="headerlink" title="Http vs Http2 vs WebSockets"></a><strong>Http vs Http2 vs WebSockets</strong></h3><h3 id="TCP-IP-Model"><a href="#TCP-IP-Model" class="headerlink" title="TCP/IP Model"></a><strong>TCP/IP Model</strong></h3><h3 id="IPV4-vs-IPV6"><a href="#IPV4-vs-IPV6" class="headerlink" title="IPV4 vs IPV6"></a><strong>IPV4 vs IPV6</strong></h3><h3 id="TCP-vs-UDP"><a href="#TCP-vs-UDP" class="headerlink" title="TCP vs UDP"></a><strong>TCP vs UDP</strong></h3><h3 id="DNS-Lookup"><a href="#DNS-Lookup" class="headerlink" title="DNS Lookup"></a><strong>DNS Lookup</strong></h3><h3 id="Https-vs-TLS"><a href="#Https-vs-TLS" class="headerlink" title="Https vs TLS"></a><strong>Https vs TLS</strong></h3><h3 id="Public-Key-Infrastructure-amp-Certivicate-Authority"><a href="#Public-Key-Infrastructure-amp-Certivicate-Authority" class="headerlink" title="Public Key Infrastructure &amp; Certivicate Authority"></a><strong>Public Key Infrastructure &amp; Certivicate Authority</strong></h3><h3 id="Symmetric-vs-Asymmetric-Encryption"><a href="#Symmetric-vs-Asymmetric-Encryption" class="headerlink" title="Symmetric vs Asymmetric Encryption"></a><strong>Symmetric vs Asymmetric Encryption</strong></h3><h3 id="Load-Balancer-gt-L4-vs-L7"><a href="#Load-Balancer-gt-L4-vs-L7" class="headerlink" title="Load Balancer - &gt; L4 vs L7"></a><strong>Load Balancer - &gt; L4 vs L7</strong></h3><p><img src="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/load_balancing.png" alt></p>
+<p><strong>Load Balancing Algorithms:</strong></p>
+<ul>
+<li><strong>Round Robin</strong> : 循环队列</li>
+<li><strong>Least Connections</strong> : Directs the traffic to the server with fewest active connections.</li>
+<li><strong>Least Response Time</strong> : Directs the traffic to the server with fewest active connections and lowest average response time.</li>
+<li><strong>Least Bandwidth Method</strong> : Directs the traffic to the server that is currently serving the least amount of traffic.(measured in megabits per second (Mbps))</li>
+<li><strong>IP Hash</strong></li>
+<li><strong>Session persistence or Sticky Session</strong> : Directs all the request for a particular session to he same server that serviced the first request for that session.</li>
+</ul>
+<p><strong>Load Balancer Categories:</strong><br><img src="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/load_balancer.jpg" alt></p>
+<ul>
+<li><strong>DNS Round Robin</strong></li>
+<li><strong>L3/L4 Load Balancer</strong> : traffic is routed by IP address and TCP port. “Layer 4 load balancing” most commonly refers to a deployment where the load balancer’s IP address is the one advertised to clients for a web site or service (via DNS, for example). As a result, clients record the load balancer’s address as the destination IP address in their requests. Usually, it is a kind of hardware load balancer.</li>
+<li><strong>L7 Load Balancer</strong> : traffic is routed by what is inside the HTTP protocol(application layer), such as HTTP header, uniform resource identifier, SSL session ID and HTML form data. Layer 7 load balancing enables ADC (Application Delivery Controllers) to redirect traffic more intelligently by inspecting content to gain deeper context on the application request. This additional context allows the ADC to not only optimize load balancing but to also rewrite content, perform security inspections and to implement access controls. And according to the requests’ content, to redirect those requests to different servers.</li>
+</ul>
+<h3 id="CDNs-amp-Edge"><a href="#CDNs-amp-Edge" class="headerlink" title="CDNs &amp; Edge"></a><strong>CDNs &amp; Edge</strong></h3><h3 id="Bloom-Filters-amp-Count-min-Sketch"><a href="#Bloom-Filters-amp-Count-min-Sketch" class="headerlink" title="Bloom Filters &amp; Count-min Sketch"></a><strong>Bloom Filters &amp; Count-min Sketch</strong></h3><ul>
+<li>Bloom filters are used to decide if an element is a member of set, it can have false positives but never have false negative.</li>
+<li>Count-min sketch is used to count the frequency of events. Keep the top k events amount a large dataset.</li>
+</ul>
+<h3 id="Paxos-Consensus-over-distributed-hosts"><a href="#Paxos-Consensus-over-distributed-hosts" class="headerlink" title="Paxos-Consensus over distributed hosts"></a><strong>Paxos-Consensus over distributed hosts</strong></h3><ul>
+<li>Leader Election</li>
+</ul>
+<h3 id="Design-Pattern-amp-Object-Oriented-Design"><a href="#Design-Pattern-amp-Object-Oriented-Design" class="headerlink" title="Design Pattern &amp; Object Oriented Design"></a><strong>Design Pattern &amp; Object Oriented Design</strong></h3><h3 id="Virtual-Machines-amp-Containers"><a href="#Virtual-Machines-amp-Containers" class="headerlink" title="Virtual Machines &amp; Containers"></a><strong>Virtual Machines &amp; Containers</strong></h3><h3 id="Publisher-Subscribe-over-Queue"><a href="#Publisher-Subscribe-over-Queue" class="headerlink" title="Publisher-Subscribe over Queue"></a><strong>Publisher-Subscribe over Queue</strong></h3><ul>
+<li>Customer facing requests should not be directly exposed to a Pub-Sub system. Encryption (e.g. Transport Layer Security (SSL/TLS)) can prevent unauthorized access.</li>
+</ul>
+<h3 id="Map-Reduce"><a href="#Map-Reduce" class="headerlink" title="Map Reduce"></a><strong>Map Reduce</strong></h3><ul>
+<li>Map: Filter and sorting the data.</li>
+<li>Reduce: Summarizing the data.<br><img src="https://raw.githubusercontent.com/Huixxi/Algorithm-with-Cplusplus/master/AlgorithmImages/mapreduce.png" alt></li>
+</ul>
+<ol>
+<li>Splits the input file in M chunks and starts many copies of the program on a cluster of machines.</li>
+<li>Master picks idle workers and assigns each one a map task or a reduce task out of M map tasks and R reduce tasks.</li>
+<li>Map task worker reads and parses key/value pairs out of input split assigned and passes each key/value pair to user-defined map function. Output key/value pairs by map function are buffered in memory.</li>
+<li>Buffered pairs are partitioned in R partitions and written to the local disks periodically. Locations of these partitioned are passed to the master, who forwards these locations to reduce workers.</li>
+<li>Reduce workers are notified by the master. Intermediate data stored on local disks of map workers are read by reduce workers using remote procedure calls and sorted to group same key together.</li>
+<li>Reduce worker passes each unique intermediate key and set of values to reduce function. The output of the reduce function is appended to the final output file for this reduce partition.</li>
+</ol>
+<h3 id="Multi-Threading-Concurrency-Locks-Synchronization"><a href="#Multi-Threading-Concurrency-Locks-Synchronization" class="headerlink" title="Multi-Threading, Concurrency, Locks, Synchronization"></a><strong>Multi-Threading, Concurrency, Locks, Synchronization</strong></h3><h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
+<li><strong>Cassandra</strong> : A wide column highly scalable database </li>
+<li><strong>MongoDB/Couchbase</strong> : A NoSQL that provides ACID at a document level.</li>
+<li><strong>MySQL</strong> : Support master-salve architecture and scales up well</li>
+<li><strong>Memcached &amp; Redis</strong>: Distributed cache.</li>
+<li><strong>Zookeeper</strong> : Centralized configuration management tool. Also used for <strong>leader election</strong> and <strong>distributed locking</strong> , scales very well for the reads but not writes, and can only store small amount of data.</li>
+<li><strong>Kafka</strong> : A fault tolerant highly available queue using publisher-subscriber or streaming application.</li>
+<li><strong>NGINX &amp; HAProxy</strong>: Load balancers</li>
+<li><strong>Solr &amp; Elastic Search</strong>: Search platform.</li>
+<li><strong>Blobstore</strong></li>
+<li><strong>Docker</strong><ul>
+<li>Kubernetes</li>
+<li>Mesos</li>
+</ul>
+</li>
+<li><strong>Hadoop / Spark</strong><ul>
+<li>HDFS </li>
+</ul>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://www.youtube.com/watch?v=UzLMhqg3_Wc" target="_blank" rel="noopener">System Design Introduction For Interview - Tushar Roy</a></li>
+<li><a href="https://towardsdatascience.com/cap-theorem-and-distributed-database-management-systems-5c2be977950e" target="_blank" rel="noopener">CAP Theorem and Distributed Database Management Systems</a></li>
+<li><a href="https://www.neovolve.com/2008/09/25/caching-should-not-be-the-source-of-truth/" target="_blank" rel="noopener">aching should not be the source of truth</a></li>
+<li><a href="https://llimllib.github.io/bloomfilter-tutorial/#:~:text=A%20Bloom%20filter%20is%20a,may%20be%20in%20the%20set." target="_blank" rel="noopener">Bloom Filters</a></li>
+<li><a href="https://florian.github.io/count-min-sketch/" target="_blank" rel="noopener">Count-Min Sketch</a></li>
+<li><a href="https://medium.com/system-design-blog" target="_blank" rel="noopener">System Design Blog</a></li>
+<li><a href="https://medium.com/system-designing-interviews/system-design-chapter-3-load-balancing-e1c89148e37" target="_blank" rel="noopener">System Design, Chapter 3: Load Balancing</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/System-Design/" rel="tag">#System Design</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/02/TinyWebServer-小白视角/" rel="next" title="小白视角：一文读懂社长的TinyWebServer">
+                <i class="fa fa-chevron-left"></i> 小白视角：一文读懂社长的TinyWebServer
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2062/01/31/Navigation/" rel="prev" title="Navigation">
+                Navigation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/Elon-Musk.jpg" alt="Hugo">
+          <p class="site-author-name" itemprop="name">Hugo</p>
+          <p class="site-description motion-element" itemprop="description">ORDINARY PEOPLE COULD CHOOSE TO BE EXTRAORDINARY!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Huixxi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/uestc-hugo/" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                  LinkedIn
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="uestc.hugo@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/Hugo13438832589" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Design"><span class="nav-number">1.</span> <span class="nav-text">System Design</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-basic-features-which-is-required-in-a-system-design"><span class="nav-number">1.1.</span> <span class="nav-text">The basic features which is required in a system design.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Important-concepts-that-you-need-to-know"><span class="nav-number">1.2.</span> <span class="nav-text">Important concepts that you need to know.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vertical-vs-Horizontal-Scaling"><span class="nav-number">1.2.1.</span> <span class="nav-text">Vertical vs Horizontal Scaling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAP-Theorem"><span class="nav-number">1.2.2.</span> <span class="nav-text">CAP Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACID-vs-BASE"><span class="nav-number">1.2.3.</span> <span class="nav-text">ACID vs BASE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partitioning-Sharding-Data"><span class="nav-number">1.2.4.</span> <span class="nav-text">Partitioning / Sharding Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consistent-Hashing"><span class="nav-number">1.2.5.</span> <span class="nav-text">Consistent Hashing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimistic-vs-Pessimistic-Locking"><span class="nav-number">1.2.6.</span> <span class="nav-text">Optimistic vs Pessimistic Locking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strong-vs-Eventual-Consistency"><span class="nav-number">1.2.7.</span> <span class="nav-text">Strong vs Eventual Consistency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relational-DB-vs-NoSQL-DB"><span class="nav-number">1.2.8.</span> <span class="nav-text">Relational DB vs NoSQL DB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Types-of-NoSQL"><span class="nav-number">1.2.9.</span> <span class="nav-text">Types of NoSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Caching"><span class="nav-number">1.2.10.</span> <span class="nav-text">Caching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-Queue"><span class="nav-number">1.2.11.</span> <span class="nav-text">Message Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Microservices"><span class="nav-number">1.2.12.</span> <span class="nav-text">Microservices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-center-Racks-Hosts"><span class="nav-number">1.2.13.</span> <span class="nav-text">Data center/Racks/Hosts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limited-Recources-CPU-Memory-Hard-Drive-Netword-Bandwidth"><span class="nav-number">1.2.14.</span> <span class="nav-text">Limited Recources: CPU/Memory/Hard Drive/Netword Bandwidth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-vs-Sequential-Read-Write-on-the-Disk"><span class="nav-number">1.2.15.</span> <span class="nav-text">Random vs Sequential Read/Write on the Disk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Http-vs-Http2-vs-WebSockets"><span class="nav-number">1.2.16.</span> <span class="nav-text">Http vs Http2 vs WebSockets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-Model"><span class="nav-number">1.2.17.</span> <span class="nav-text">TCP/IP Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPV4-vs-IPV6"><span class="nav-number">1.2.18.</span> <span class="nav-text">IPV4 vs IPV6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-vs-UDP"><span class="nav-number">1.2.19.</span> <span class="nav-text">TCP vs UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-Lookup"><span class="nav-number">1.2.20.</span> <span class="nav-text">DNS Lookup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Https-vs-TLS"><span class="nav-number">1.2.21.</span> <span class="nav-text">Https vs TLS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Public-Key-Infrastructure-amp-Certivicate-Authority"><span class="nav-number">1.2.22.</span> <span class="nav-text">Public Key Infrastructure &amp; Certivicate Authority</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symmetric-vs-Asymmetric-Encryption"><span class="nav-number">1.2.23.</span> <span class="nav-text">Symmetric vs Asymmetric Encryption</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-Balancer-gt-L4-vs-L7"><span class="nav-number">1.2.24.</span> <span class="nav-text">Load Balancer - &gt; L4 vs L7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDNs-amp-Edge"><span class="nav-number">1.2.25.</span> <span class="nav-text">CDNs &amp; Edge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bloom-Filters-amp-Count-min-Sketch"><span class="nav-number">1.2.26.</span> <span class="nav-text">Bloom Filters &amp; Count-min Sketch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Paxos-Consensus-over-distributed-hosts"><span class="nav-number">1.2.27.</span> <span class="nav-text">Paxos-Consensus over distributed hosts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Design-Pattern-amp-Object-Oriented-Design"><span class="nav-number">1.2.28.</span> <span class="nav-text">Design Pattern &amp; Object Oriented Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual-Machines-amp-Containers"><span class="nav-number">1.2.29.</span> <span class="nav-text">Virtual Machines &amp; Containers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Publisher-Subscribe-over-Queue"><span class="nav-number">1.2.30.</span> <span class="nav-text">Publisher-Subscribe over Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map-Reduce"><span class="nav-number">1.2.31.</span> <span class="nav-text">Map Reduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Threading-Concurrency-Locks-Synchronization"><span class="nav-number">1.2.32.</span> <span class="nav-text">Multi-Threading, Concurrency, Locks, Synchronization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">1.3.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.4.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hugo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hugo-818';
+      var disqus_identifier = '2020/07/13/Basic-System-Design/';
+      var disqus_title = "Basic System Design";
+      var disqus_url = 'https://david-hu-1q84.github.io/2020/07/13/Basic-System-Design/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+<style>
+#cw-root { position: fixed; right: 20px; bottom: 20px; z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+.cw-fab { width: 56px; height: 56px; border-radius: 50%; border: none; background: #111; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.18); transition: transform .15s ease, background .15s ease; }
+.cw-fab:hover { transform: scale(1.06); background: #333; }
+.cw-fab .cw-icon-close { display: none; }
+#cw-root.cw-open .cw-fab .cw-icon-chat { display: none; }
+#cw-root.cw-open .cw-fab .cw-icon-close { display: block; }
+
+.cw-panel { position: absolute; right: 0; bottom: 72px; width: 380px; max-width: calc(100vw - 32px); height: 560px; max-height: calc(100vh - 120px); background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.16); display: flex; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(12px) scale(.98); pointer-events: none; transition: opacity .18s ease, transform .18s ease; }
+#cw-root.cw-open .cw-panel { opacity: 1; transform: none; pointer-events: auto; }
+
+.cw-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #eee; }
+.cw-title { font-size: 15px; font-weight: 600; color: #111; }
+.cw-sub { font-size: 12px; color: #999; margin-top: 1px; }
+.cw-header-btns { display: flex; gap: 6px; }
+.cw-header-btns button { border: 1px solid #e5e5e5; background: #fff; color: #555; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+.cw-header-btns button:hover { background: #f5f5f5; }
+
+.cw-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.cw-msg { display: flex; }
+.cw-msg.user { justify-content: flex-end; }
+.cw-bubble { max-width: 86%; padding: 10px 13px; border-radius: 12px; font-size: 14px; line-height: 1.6; word-break: break-word; }
+.cw-msg.user .cw-bubble { background: #111; color: #fff; border-bottom-right-radius: 4px; }
+.cw-msg.assistant .cw-bubble { background: #f5f5f5; color: #222; border-bottom-left-radius: 4px; }
+.cw-msg.error .cw-bubble { background: #fef2f2; color: #b91c1c; }
+
+.cw-bubble p { margin: 0 0 .5em; }
+.cw-bubble p:last-child { margin-bottom: 0; }
+.cw-bubble pre { background: #0d1117; color: #e6edf3; padding: 12px; border-radius: 8px; overflow-x: auto; margin: .5em 0; }
+.cw-bubble code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.cw-bubble :not(pre) > code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; }
+.cw-msg.user .cw-bubble :not(pre) > code { background: rgba(255,255,255,.2); }
+.cw-bubble table { border-collapse: collapse; margin: .5em 0; }
+.cw-bubble th, .cw-bubble td { border: 1px solid #ddd; padding: 4px 8px; font-size: 13px; }
+.cw-bubble img { max-width: 100%; border-radius: 6px; }
+
+.cw-streaming { white-space: pre-wrap; word-break: break-word; }
+.cw-streaming::after { content: '▍'; color: #888; animation: cw-blink 1s steps(2) infinite; }
+@keyframes cw-blink { 50% { opacity: 0; } }
+
+.cw-composer { display: flex; align-items: flex-end; gap: 8px; padding: 12px; border-top: 1px solid #eee; }
+.cw-composer textarea { flex: 1; resize: none; border: 1px solid #e5e5e5; border-radius: 10px; padding: 9px 12px; font-size: 14px; line-height: 1.5; max-height: 120px; outline: none; font-family: inherit; }
+.cw-composer textarea:focus { border-color: #111; }
+.cw-send, .cw-stop { border: none; border-radius: 10px; padding: 9px 14px; font-size: 13px; cursor: pointer; }
+.cw-send { background: #111; color: #fff; }
+.cw-send:disabled { background: #ccc; cursor: not-allowed; }
+.cw-stop { background: #f5f5f5; color: #b91c1c; }
+.cw-hidden { display: none !important; }
+
+@media (max-width: 480px) { .cw-panel { right: -4px; } }
+</style>
+
+<div id="cw-root" aria-hidden="true">
+  <button id="cw-fab" class="cw-fab" title="打开 AI 助手" aria-label="打开 AI 助手">
+    <svg class="cw-icon-chat" viewbox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg class="cw-icon-close" viewbox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="cw-panel">
+    <header class="cw-header">
+      <div>
+        <div class="cw-title" id="cw-title">AI 助手</div>
+        <div class="cw-sub" id="cw-sub"></div>
+      </div>
+      <div class="cw-header-btns">
+        <button id="cw-clear" title="清空对话">清空</button>
+        <button id="cw-close" title="关闭">✕</button>
+      </div>
+    </header>
+    <div id="cw-messages" class="cw-messages"></div>
+    <div class="cw-composer">
+      <textarea id="cw-input" rows="1" placeholder="输入消息，Enter 发送，Shift+Enter 换行"></textarea>
+      <button id="cw-stop" class="cw-stop cw-hidden">停止</button>
+      <button id="cw-send" class="cw-send">发送</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.__CHAT_CONFIG__ = {
+  apiBase: "http://localhost:11434/v1",
+  model: "llama3",
+  key: "",
+  title: "AI 助手",
+  welcome: "你好，我是跑在本机 Ollama 的 llama3 模型，有什么可以帮你？",
+  systemPrompt: ""
+};
+</script>
+
+<script>
+(function () {
+  var cfg = window.__CHAT_CONFIG__ || {};
+  var root = document.getElementById('cw-root');
+  var fab = document.getElementById('cw-fab');
+  var messagesEl = document.getElementById('cw-messages');
+  var inputEl = document.getElementById('cw-input');
+  var sendBtn = document.getElementById('cw-send');
+  var stopBtn = document.getElementById('cw-stop');
+  var clearBtn = document.getElementById('cw-clear');
+  var closeBtn = document.getElementById('cw-close');
+
+  var history = [];
+  var streaming = false;
+  var controller = null;
+
+  document.getElementById('cw-title').textContent = cfg.title || 'AI 助手';
+  document.getElementById('cw-sub').textContent = cfg.model || '';
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderMarkdown(text) {
+    if (typeof marked === 'undefined') return escapeHtml(text).replace(/\n/g, '<br>');
+    var token = 'X' + Math.random().toString(36).slice(2) + 'X';
+    var math = [];
+
+    text = text.replace(/\$\$([\s\S]+?)\$\$/g, function (m, t) {
+      math.push(['display', t.trim()]);
+      return token + 'M' + (math.length - 1) + token;
+    });
+    text = text.replace(/(^|[^\\$])\$([^$\n]+?)\$/g, function (m, p, t) {
+      math.push(['inline', t.trim()]);
+      return p + token + 'M' + (math.length - 1) + token;
+    });
+
+    var html = marked.parse(text);
+
+    html = html.replace(new RegExp(token + 'M(\\d+)' + token, 'g'), function (m, i) {
+      var item = math[+i];
+      if (typeof katex === 'undefined') return '<code>' + escapeHtml(item[1]) + '</code>';
+      try {
+        return katex.renderToString(item[1], { displayMode: item[0] === 'display', throwOnError: false });
+      } catch (e) {
+        return '<code>' + escapeHtml(item[1]) + '</code>';
+      }
+    });
+    return html;
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addMessage(role, content, opts) {
+    opts = opts || {};
+    var msg = document.createElement('div');
+    msg.className = 'cw-msg ' + role;
+    var bubble = document.createElement('div');
+    bubble.className = 'cw-bubble';
+    if (opts.raw) {
+      var streamEl = document.createElement('div');
+      streamEl.className = 'cw-streaming';
+      streamEl.textContent = content;
+      bubble.appendChild(streamEl);
+    } else {
+      bubble.innerHTML = renderMarkdown(content);
+    }
+    msg.appendChild(bubble);
+    messagesEl.appendChild(msg);
+    scrollToBottom();
+    return msg;
+  }
+
+  function addWelcome() {
+    if (cfg.welcome) addMessage('assistant', cfg.welcome);
+  }
+
+  function clearConversation() {
+    if (streaming) return;
+    history = [];
+    messagesEl.innerHTML = '';
+    addWelcome();
+  }
+
+  function buildRequestBody() {
+    var messages = [];
+    if (cfg.systemPrompt) messages.push({ role: 'system', content: cfg.systemPrompt });
+    messages = messages.concat(history);
+    return { model: cfg.model, stream: true, messages: messages };
+  }
+
+  function setStreaming(on) {
+    streaming = on;
+    sendBtn.disabled = on;
+    sendBtn.classList.toggle('cw-hidden', on);
+    stopBtn.classList.toggle('cw-hidden', !on);
+    inputEl.disabled = on;
+  }
+
+  function send() {
+    if (streaming) return;
+    var text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = '';
+    autoGrow();
+
+    history.push({ role: 'user', content: text });
+    addMessage('user', text);
+
+    var assistantMsg = addMessage('assistant', '', { raw: true });
+    var streamEl = assistantMsg.querySelector('.cw-streaming');
+    var bubble = assistantMsg.querySelector('.cw-bubble');
+    var raw = '';
+
+    controller = new AbortController();
+    setStreaming(true);
+
+    var headers = { 'Content-Type': 'application/json' };
+    if (cfg.key) headers['X-Chat-Key'] = cfg.key;
+
+    fetch(cfg.apiBase + '/chat/completions', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: headers,
+      body: JSON.stringify(buildRequestBody())
+    }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var reader = res.body.getReader();
+      var decoder = new TextDecoder();
+      var buffer = '';
+
+      function pump() {
+        return reader.read().then(function (result) {
+          if (result.done) return;
+          buffer += decoder.decode(result.value, { stream: true });
+          var lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          lines.forEach(function (line) {
+            var t = line.trim();
+            if (t.indexOf('data:') !== 0) return;
+            var payload = t.slice(5).trim();
+            if (payload === '[DONE]') return;
+            try {
+              var json = JSON.parse(payload);
+              var delta = json.choices && json.choices[0] && json.choices[0].delta && json.choices[0].delta.content;
+              if (delta) {
+                raw += delta;
+                streamEl.textContent = raw;
+                scrollToBottom();
+              }
+            } catch (e) {}
+          });
+          return pump();
+        });
+      }
+
+      return pump().then(function () {
+        if (!raw) raw = '（无回复）';
+        history.push({ role: 'assistant', content: raw });
+        streamEl.remove();
+        bubble.innerHTML = renderMarkdown(raw);
+        scrollToBottom();
+        setStreaming(false);
+      });
+    }).catch(function (err) {
+      if (err.name === 'AbortError') {
+        if (raw) {
+          history.push({ role: 'assistant', content: raw });
+          streamEl.remove();
+          bubble.innerHTML = renderMarkdown(raw);
+        } else {
+          assistantMsg.remove();
+        }
+      } else {
+        assistantMsg.remove();
+        addMessage('error', '请求失败：' + err.message + '。请检查服务器与 CORS 配置。');
+      }
+      setStreaming(false);
+    });
+  }
+
+  function stop() {
+    if (controller) controller.abort();
+  }
+
+  function autoGrow() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
+  }
+
+  fab.addEventListener('click', function () {
+    var open = root.classList.toggle('cw-open');
+    root.setAttribute('aria-hidden', String(!open));
+    if (open) inputEl.focus();
+  });
+  closeBtn.addEventListener('click', function () {
+    root.classList.remove('cw-open');
+    root.setAttribute('aria-hidden', 'true');
+  });
+  clearBtn.addEventListener('click', clearConversation);
+  sendBtn.addEventListener('click', send);
+  stopBtn.addEventListener('click', stop);
+  inputEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+  inputEl.addEventListener('input', autoGrow);
+
+  addWelcome();
+})();
+</script>
+
+
+
+</body>
+</html>

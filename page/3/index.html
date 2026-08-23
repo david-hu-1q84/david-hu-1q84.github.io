@@ -260,8 +260,8 @@
             
               
                 
-                <a class="post-title-link" href="/2018/02/09/来也笔试题/" itemprop="url">
-                  来也笔试题
+                <a class="post-title-link" href="/2019/07/04/RL-Paper-04-PPO/" itemprop="url">
+                  RL_Paper_04:PPO
                 </a>
               
             
@@ -274,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2018-02-09T22:47:37+08:00" content="2018-02-09">
-              2018-02-09
+            <time itemprop="dateCreated" datetime="2019-07-04T00:00:00+08:00" content="2019-07-04">
+              2019-07-04
             </time>
           </span>
 
@@ -285,8 +285,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/02/09/来也笔试题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/09/来也笔试题/" itemprop="commentsCount"></span>
+                <a href="/2019/07/04/RL-Paper-04-PPO/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/04/RL-Paper-04-PPO/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -310,21 +310,21 @@
 
       
         
-          <h3 id="1-操作系统基础题"><a href="#1-操作系统基础题" class="headerlink" title="1.操作系统基础题"></a>1.操作系统基础题</h3><blockquote>
-<p><strong>1）OS通过虚拟内存技术来解决这种“矛盾”。 </strong><br>    通过将部分数据存储在外部磁盘中，在需要的时候进行数据交换（外部磁盘与内存之间），以缓解物理内存不足的问题。<br><strong>4）解释进程与线程的区别： </strong></p>
-<pre><code>+ 进程：cpu分配资源的最小单位，各进程之间资源是不共享的，独立占有的。
-+ 线程：cpu调度的最小单位，一个进程可包含多个线程，各线程之间共享同一资源
-</code></pre></blockquote>
-<h3 id="2-语法基础题"><a href="#2-语法基础题" class="headerlink" title="2.语法基础题"></a>2.语法基础题</h3><blockquote>
-<p><strong>4）解释Python的变量作用域查找规则  </strong><br>    Python的变量作用域查找顺序遵从：<br>local（局部）<code>--&gt;</code> enclosing（函数范围）<code>--&gt;</code> global（全局）<code>--&gt;</code> build-in（内建对象）<br><strong>5）解释Python的generator（生成器）的语法行为及适用场合  </strong><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/02/09/来也笔试题/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
+            <h2 id="Proximal-Policy-Optimization-Algorithms"><a href="#Proximal-Policy-Optimization-Algorithms" class="headerlink" title="Proximal Policy Optimization Algorithms"></a>Proximal Policy Optimization Algorithms</h2><p> <em><a href="https://arxiv.org/pdf/1707.06347.pdf" target="_blank" rel="noopener">Paper Source</a></em><br><code>Journal:</code><br><code>Year: 2017</code><br><code>Institute: OpenAI</code><br><code>Author: John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov</code><br><code>#</code> <em>Deep Reinforcement Learning</em> <code>#</code> <em>Policy Gradient</em></p>
+<p>PPO(Proximal Policy Optimization), a much simpler to implement, better sample complexity, policy gradient method that has a novel objective with clipped problability ratios, which forms a pessimistic estimate of the performance of the policy ($\theta_{old}$ is the vector of policy parameters before the update).</p>
+<p>In policy gradient, the loss function is:</p>
+<p>where $\pi_{\theta}$ is a stochastic policy and $\hat{A}_t$ is an estimator of the advantage function at timestep $t$.<br>While it is appealing to perform multiple steps of optimization on this loss $L^{PG}$ using the same trajectory, doing so is not well-justified, and empirically it often leads to destructively large policy updates. </p>
+<p>In TRPO, the loss function becomes: </p>
+<p>Now, in PPO, the loss function becomes:</p>
+<p>This objective can further be augmented by adding an <strong>entropy bonus</strong> to ensure sufficient exploration, as suggested in past work. The final objective is: </p>
+<p>where $c_1$, $c_2$ are coefficients, and $S$ denotes an entropy bonus, and $L^{VF}$ is a squared-error loss $(V_{\theta}(s_t) - V_t^{target})^2$. </p>
+<p>And the total algorithm is as follows:<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/rlblog_images/ppo.png" alt></p>
+
+          
         
       
-    </p></blockquote></div>
+    </div>
 
     <div>
       
@@ -369,8 +369,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/12/29/Dining-Etiquette/" itemprop="url">
-                  Dining Etiquette（西方餐饮礼仪文化）
+                <a class="post-title-link" href="/2019/07/04/RL-Paper-05-Hierarchical-RL/" itemprop="url">
+                  RL_Paper_05:Hierarchical RL
                 </a>
               
             
@@ -383,38 +383,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-29T12:39:39+08:00" content="2017-12-29">
-              2017-12-29
+            <time itemprop="dateCreated" datetime="2019-07-04T00:00:00+08:00" content="2019-07-04">
+              2019-07-04
             </time>
           </span>
 
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Non-Tech/" itemprop="url" rel="index">
-                    <span itemprop="name">Non-Tech</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/12/29/Dining-Etiquette/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/29/Dining-Etiquette/" itemprop="commentsCount"></span>
+                <a href="/2019/07/04/RL-Paper-05-Hierarchical-RL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/04/RL-Paper-05-Hierarchical-RL/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -438,413 +419,480 @@
 
       
         
-          <h3 id="Ladies-First-女士优先"><a href="#Ladies-First-女士优先" class="headerlink" title="Ladies First(女士优先)"></a>Ladies First(女士优先)</h3><blockquote>
-<p>When you’re having lunch and dinner with a lady, <strong>she is always first</strong>.</p>
+          
+            <h2 id="META-LEARNING-SHARED-HIERARCHIES"><a href="#META-LEARNING-SHARED-HIERARCHIES" class="headerlink" title="META LEARNING SHARED HIERARCHIES"></a>META LEARNING SHARED HIERARCHIES</h2><p> <em><a href="https://arxiv.org/pdf/1710.09767.pdf" target="_blank" rel="noopener">Paper Source</a></em><br><code>Journal:</code><br><code>Year: 2017</code><br><code>Institute: OpenAI</code><br><code>Author: Kevin Frans, Jonathan Ho, Xi Chen, Pieter Abbeel, John Schulman</code><br><code>#</code> <em>Deep Reinforcement Learning</em> <code>#</code> <em>Meta Learning</em></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/06/27/RL-Weekly-1/" itemprop="url">
+                  RL Weekly 1
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-06-27T00:00:00+08:00" content="2019-06-27">
+              2019-06-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/06/27/RL-Weekly-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/27/RL-Weekly-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Unsupervised-State-Representation-Learning-in-Atari"><a href="#Unsupervised-State-Representation-Learning-in-Atari" class="headerlink" title="Unsupervised State Representation Learning in Atari"></a>Unsupervised State Representation Learning in Atari</h2><p><a href="https://arxiv.org/pdf/1906.08226.pdf" target="_blank" rel="noopener">[Paper]</a> <a href="https://github.com/mila-iqia/atari-representation-learning" target="_blank" rel="noopener">[Code]</a><br><code>Journal: NeurIPS</code><br><code>Year: 2019</code><br><code>Institute: Mila, Université de Montréa</code><br><code>Author:Ankesh Anand*, Evan Racah*, Sherjil Ozair*</code><br><code>#</code> <em>State Representation Learning</em> <code>#</code> <em>Constrastive Self-Supervised Learning</em></p>
+<p><em>Abstract</em></p>
+<p>State representation learning without supervision from rewards is a challenging open problem. This paper proposes a new contrastive state representation learning method called <strong>Spatiotemporal DeepInfomax (ST-DIM)</strong> that leverages recent advances in self-supervision and learns state representations by maximizing the mutual information across spatially and temporally distinct features of a neural encoder of the observations.  </p>
+<h3 id="0-Mutual-Information"><a href="#0-Mutual-Information" class="headerlink" title="0.Mutual Information"></a><em>0.Mutual Information</em></h3><ol>
+<li><em>What is mutual information?</em><br><a href="https://en.wikipedia.org/wiki/Mutual_information" target="_blank" rel="noopener">Wikipedia-Mutual information</a> It quantifies the “amount of information” (in units such as shannons, commonly called bits) obtained about one random variable through observing the other random variable.</li>
+<li><em>Why to maximize it?</em></li>
+</ol>
+<h3 id="1-Spatiotemporal-Deep-Infomax"><a href="#1-Spatiotemporal-Deep-Infomax" class="headerlink" title="1.Spatiotemporal Deep Infomax"></a><em>1.Spatiotemporal Deep Infomax</em></h3><p>Prior work in neuroscience has suggested that the brain maximizes predictive information at an abstract level to avoid sensory overload. Thus our representation learning approach relies on maximizing an estimate based on a lower bound on the mutual information over consecutive observations $x_t$ and $x_{t+1}$.<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/rlblog_images/r1.png" alt="From https://arxiv.org/pdf/1906.08226.pdf"></p>
+<p>For the mutual information estimator, we use <strong>infoNCE</strong> :</p>
+<p>The global-local objective(The representations of the small image patches are taken to be the hidden activations of the convolutional encoder applied to the full observation):</p>
+<p>The local-local objective:</p>
+<h3 id="2-What-the-constrastive-task-is"><a href="#2-What-the-constrastive-task-is" class="headerlink" title="2.What the constrastive task is."></a><em>2.What the constrastive task is.</em></h3><p>I’ve ask a question about this paper, and surprisingly the author <strong>Ankesh Anand</strong> himself answered my question. He said:</p>
+<blockquote>
+<p>It’s easier to think of the method in terms of what the contrastive task it than to understand the mutual information stuff. The contrastive task is: Correctly classify whether a pair of frames are consecutive or not. To do this task well, an encoder needs to only focus on things that are changing across time (often there are high-level features such as the agents, enemies, scores etc.), and ignore the low-level or pixel-level details such as the precise texture of the background. For solving the contrastive task, we use the infoNCE loss. Turns out if you minimize the InfoNCE loss, it is equivalent to maximizing a lower bound on the mutual information between consecutive frames.<br>If you do this classification task between whole frames, the encoder will focus only on <strong>high entropy features such as the clock since its changing every frame</strong>. So, to prevent the encoder from focusing only on a single high entropy feature, we do the contrastive task across each local patch in the feature map. </p>
+</blockquote>
+<h3 id="3-Framework"><a href="#3-Framework" class="headerlink" title="3.Framework"></a><em>3.Framework</em></h3><p><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/rlblog_images/r2.png" alt="From https://arxiv.org/pdf/1906.08226.pdf"></p>
+<h3 id="4-Discussion"><a href="#4-Discussion" class="headerlink" title="4.Discussion"></a><em>4.Discussion</em></h3><p>We also observe that the best generative model ( <strong>PIXEL-PRED</strong> ) does not suffer from this problem.It performs its worst on high-entropy features such as the clock and player score (where ST-DIM excels), and does slightly better than ST-DIM on low-entropy features which have a large contribution in the pixel space such as player and enemy locations. This sheds light on the qualitative difference between contrastive and generative methods: contrastive methods prefer capturing high-entropy features (irrespective of contribution to pixel space) while generative methods do not, and generative methods prefer capturing large objects which have low entropy. This complementary nature suggests hybrid models as an exciting direction of future work.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/06/03/RL-Paper-02-DQN/" itemprop="url">
+                  RL_Paper_02:DQN
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-06-03T00:00:00+08:00" content="2019-06-03">
+              2019-06-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/06/03/RL-Paper-02-DQN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/03/RL-Paper-02-DQN/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Human-level-control-through-deep-reinforcement-learning"><a href="#Human-level-control-through-deep-reinforcement-learning" class="headerlink" title="Human-level control through deep reinforcement learning"></a>Human-level control through deep reinforcement learning</h2><p> <em><a href="https://www.nature.com/articles/nature14236" target="_blank" rel="noopener">Paper Source</a></em><br><code>Journal: Nature</code><br><code>Year: 2015</code><br><code>Institute: DeepMind</code><br><code>Author: Volodymyr Mnih1*, Koray Kavukcuoglu1*, David Silver1*</code><br><code>#</code> <em>Deep Reinforcement Learning(DRL)</em><br> _</p>
+<p>Abstract</p>
+<p>_ To use reinforcement learning successfully in situations approaching real-world complexity, however, agents are confronted with a difficult task: they must derive efficient representations of the environment from high-dimensional sensory inputs, and use these to generalize past experience to new situations.Remarkably, humans andother animals seem to solve this problem through a harmonious combination of reinforcement learning and hierarchical sensory processing systems, the former evidenced by a wealth of neural data revealing notable parallels between the phasic signals emitted by dopaminergic neurons and temporal difference reinforcement learning algorithms.  </p>
+<p>Reinforcement learning is known to be unstable or even to diverge when a nonlinear function approximator such as a neural network is used to represent the action-value (also known as $Q$) function. This instability has several causes: the correlations present in the sequence of observations, the fact that small updates to $Q$ may significantly change the policy and therefore change the data distribution, and the correlations between the action-values ($Q$) and the target values $r + \lambda max_{a’}Q(s’, a’)$.<br>Deep Q network use two methods to reduce this correlation: <strong>experience replay</strong> and <strong>target network</strong>.</p>
+<p><em>1.INTRODUCTION</em><br>They parameterize an approximate value function $Q(s, a; \theta_i)$ using the deep convolutional neural network.<br> <em>Experience replay</em><br>Store the agent’s experiences $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$ in a buffer $D_t = \{e_1, \dots, e_t\}$. During learning, we apply Q-learning updates, on samples (or minibatches) of experience $(s,a,r,s’) \sim U(D)$,<br> <strong>Loss Function:</strong></p>
+<p> <em>Target network</em><br>To simulate the supervise learning which needs a labeled target.<br>The target network parameters $\theta_i^{-}$ are only updated with the Q-network parameters $\theta_i$ every C steps and are held fixed between individual updates.<br> <em>2.METHODS</em><br> <em>Preprocessing</em><br>Rescaling m rescent frames. (<code>RGB-&gt;GrayScale; 210X160-&gt;84X84</code>)<br> <em>Model architecture</em><br><code>Input Size:</code> <em><code>84x84x4</code></em><br><code>Inpue Layer:</code> <em><code>Conv layer: 32 filters, size 8x8, stride 4, relu</code></em><br><code>First Hidden Layer:</code> <em><code>Conv layer: 64 filters, size 4x4, stride 2, relu</code></em><br><code>Second Hidden Layer:</code> <em><code>Conv layer: 64 filters, size 3x3, stride 1, relu</code></em><br><code>Final Hidden Layer:</code> <em><code>Fully-connected and consists of 512 rectifier units.</code></em><br><code>Output Layer:</code> <em><code>Fully-connected linear layer with a single output for each valid action(Output size varied between 4 and 18).</code></em></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/06/03/RL-Paper-03-Rainbow/" itemprop="url">
+                  RL_Paper_03:Rainbow
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-06-03T00:00:00+08:00" content="2019-06-03">
+              2019-06-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/06/03/RL-Paper-03-Rainbow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/03/RL-Paper-03-Rainbow/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Rainbow-Combining-Improvements-in-Deep-Reinforcement-Learning"><a href="#Rainbow-Combining-Improvements-in-Deep-Reinforcement-Learning" class="headerlink" title="Rainbow: Combining Improvements in Deep Reinforcement Learning"></a>Rainbow: Combining Improvements in Deep Reinforcement Learning</h2><p> <em><a href="https://arxiv.org/pdf/1710.02298.pdf" target="_blank" rel="noopener">Paper Source</a></em><br><code>Journal: AAAI</code><br><code>Year: 2017</code><br><code>Institute: DeepMind</code><br><code>Author: Matteo Hessel, Joseph Modayil, Hado van Hasselt</code><br><code>#</code> <em>Deep Reinforcement Learning</em><br> _</p>
+<p>Abstract</p>
+<p>_ This paper examines six main extensions to DQN algorithm and empirically studies their combination. (It is a good paper which gives you a summary of several important technologies to alleviate the problems remaining in DQN and provides you some valuable insights in this research region.)<br><a href="https://github.com/Huixxi/CS234-Reinforcement-Learning/tree/master/assignment%202" target="_blank" rel="noopener">Baseline: Deep Q-Network(DQN) Algorithm Implementation in CS234 Assignment 2</a>  </p>
+<p> <em>INTRODUCTION</em><br>Because the traditional tabular methods are not applicable in arbitrarily large state spaces, we turn to those approximate solution methods (<code>linear approximator &amp; nonlinear approximator</code> <code>value-function approximation &amp; policy approximation</code>), which is to find a good approximate solution using limited computational resources. We can use a <code>linear function</code>, or <code>multi-layer artificial neural networks</code>, or <code>decision tree</code> as a parameterized function to approximate the value-function or policy.(More, see Sutton’s book <a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener">Reinforcement Learning: An Introduction</a> Chapter 9).<br>The following methods are all <code>value-function approximation</code> and <code>gradient-based(using the gradients to update the parameters)</code>, and they all use <strong>experience replay</strong> and <strong>target network</strong> to eliminate the correlations present in the sequence of observations.</p>
+<h3 id="1-gt-Linear-Function"><a href="#1-gt-Linear-Function" class="headerlink" title="1 &gt; Linear Function"></a><strong>1 &gt; Linear Function</strong></h3><p>Using a linear function to approximate the value function(always the action value).</p>
+<p>$w$ is the parameters, $x(s)$ is called a <strong>feature vector</strong> representing state $s$, and the state $s$ is the images(frames) observed by the agent in most time. So a linear approximator implemented with <em>tensorflow</em> can be just a fully-connected layer.  </p>
+<pre><code>1  
+2  
+3  
+4  
+5  
+</code></pre><p>| </p>
+<pre><code>import tensorflow as tf  
+# state: a sequence of image(frame)  
+inputs = tf.layers.flatten(state)  
+# scope, which is used to distinguish q_params and target_q_params  
+out = layers.fully_connected(inputs, num_actions, scope=scope, reuse=reuse)  
+</code></pre><p>—|—  </p>
+<h3 id="2-gt-Nonlinear-DQN"><a href="#2-gt-Nonlinear-DQN" class="headerlink" title="2 &gt; Nonlinear - DQN"></a><strong>2 &gt; Nonlinear - DQN</strong></h3><p> <strong> <em>Deep Q-Network.</em></strong> The main difference of <em>DQN</em> from <em>linear approximator</em> is the architecture of getting the _q_value_ , it is nonlinear.<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dqn.png" alt><br>And the total algorithm is as follows:<br><img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/dqn_algorithm.png" alt><br>The approximator of DeepMind DQN implemented with <em>tensorflow</em> as described in their <a href="https://www.nature.com/articles/nature14236" target="_blank" rel="noopener">Nature paper</a> can be:  </p>
+<pre><code>1  
+2  
+3  
+4  
+5  
+6  
+7  
+8  
+</code></pre><p>| </p>
+<pre><code>import tensorflow as tf  
+with tf.variable_scope(scope, reuse=reuse) as _:  
+    conv1 = layers.conv2d(state, num_outputs=32, kernel_size=(8, 8), stride=4, activation_fn=tf.nn.relu)  
+    conv2 = layers.conv2d(conv1, num_outputs=64, kernel_size=(4, 4), stride=2, activation_fn=tf.nn.relu)  
+    conv3 = layers.conv2d(conv2, num_outputs=64, kernel_size=(3, 3), stride=1, activation_fn=tf.nn.relu)  
+    full_inputs = layers.flatten(conv3)  
+    full_layer = layers.fully_connected(full_inputs, num_outputs=512, activation_fn=tf.nn.relu)  
+    out = layers.fully_connected(full_layer, num_outputs=num_actions)  
+</code></pre><p>—|—  </p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/01_dqn.py" target="_blank" rel="noopener">Do DQN from scratch(basic version)</a></p>
+<h3 id="3-gt-Nonlinear-DDQN"><a href="#3-gt-Nonlinear-DDQN" class="headerlink" title="3 &gt; Nonlinear - DDQN"></a><strong>3 &gt; Nonlinear - DDQN</strong></h3><p> <strong> <em>Double DQN.</em></strong> The main difference of <em>DDQN</em> from <em>DQN</em> is the way of calculating the target q value.<br>As a reminder,<br>In <em>Q-Learning:</em></p>
+<p>In <em>DQN:</em><br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dqn_net.png" alt><br>where $\theta_{i-1}$ is the target network parameters which is always represeted with $\theta_t^-$.</p>
+<p>There is a problem with deep q-learning that “It is known to sometimes learn unrealistically high action values because it includes a maximization step over estimated action values, which tends to prefer overestimated to underestimated values” as said in <a href="https://arxiv.org/pdf/1509.06461.pdf" target="_blank" rel="noopener">DDQN paper</a>.<br>The idea of <em>Double Q-learning</em> is to reduce overestimations by decomposing the max operation in the target into action selection and action evaluation.</p>
+<p>Implement with <em>tensorflow</em> (the minimal possible change to DQN in cs234 assignment 2)  </p>
+<pre><code>1  
+2  
+3  
+4  
+5  
+6  
+7  
+8  
+9  
+10  
+11  
+12  
+13  
+</code></pre><p>| </p>
+<pre><code># DQN  
+q_samp = tf.where(self.done_mask, self.r, self.r + self.config.gamma * tf.reduce_max(target_q, axis=1))  
+actions = tf.one_hot(self.a, num_actions)  
+q = tf.reduce_sum(tf.multiply(q, actions), axis=1)  
+self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))  
+
+# DDQN  
+max_q_idxes = tf.argmax(q, axis=1)  
+max_actions = tf.one_hot(max_q_idxes, num_actions)  
+q_samp = tf.where(self.done_mask, self.r, self.r + self.config.gamma * tf.reduce_sum(tf.multiply(target_q, max_actions), axis=1))  
+actions = tf.one_hot(self.a, num_actions)  
+q = tf.reduce_sum(tf.multiply(q, actions), axis=1)  
+self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))  
+</code></pre><p>—|—  </p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/02_ddqn.py" target="_blank" rel="noopener">Do Double DQN from scratch(basic version)</a></p>
+<h3 id="4-gt-Prioritized-experience-replay"><a href="#4-gt-Prioritized-experience-replay" class="headerlink" title="4 &gt;Prioritized experience replay"></a><strong>4 &gt;Prioritized experience replay</strong></h3><p> <strong> <em>Prioritized experience replay.</em></strong> Improve data efficiency, by replaying more often transitions from which there is more to learn.<br>And the total algorithm is as follows:<br><img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/prior_replay.png" alt></p>
 <ul>
-<li>When she sits…<br><img src="http://ogddv0qu3.bkt.clouddn.com/%E9%A4%90%E6%A1%8C%E7%A4%BC%E4%BB%AA1.PNG" alt="ladies first"></li>
-<li>When she orders…<br><img src="http://ogddv0qu3.bkt.clouddn.com/%E9%A4%90%E6%A1%8C%E7%A4%BC%E4%BB%AA2.PNG" alt="ladies first"></li>
+<li><p><strong>Prioritizing with Temporal-Difference(TD) Error</strong><br>TD-Error: how far the value is from its next-step bootstrap estimate<br>Where the value $r + \lambda V(s’) $ is known as the TD target.<br>Experiences with high magnitude TD error also appear to be replayed more often. TD-errors have also been used as a prioritization mechanism for determining where to focus resources, for example when choosing where to explore or which features to select. However, the TD-error can be a poor estimate in some circumstances as well, e.g. when rewards are noisy.</p>
+</li>
+<li><p><strong>Stochastic Prioritization</strong><br>Because <code>greedy prioritization</code> results in high-error transitions are replayed too frequently causing lack of diversity which could lead to <code>over-fitting</code>. So <code>Stochastic Prioritization</code> is intruduced in order to add diversity and find a balance between greedy prioritization and random sampling.<br>We ensure that the probability of being sampled is monotonic in a transition’s priority, while guaranteeing a non-zero probability even for the lowest-priority transition. Concretely, the probability of sampling transition i as</p>
+</li>
 </ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/29/Dining-Etiquette/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/07/Anatomy/" itemprop="url">
-                  Anatomy(解剖学)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-07T12:11:00+08:00" content="2017-12-07">
-              2017-12-07
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/English/" itemprop="url" rel="index">
-                    <span itemprop="name">English</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/07/Anatomy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/07/Anatomy/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Legal-Terminology"><a href="#Legal-Terminology" class="headerlink" title="Legal Terminology"></a>Legal Terminology</h3><blockquote>
-<p><code>cornea(角膜)</code>: At the front part of the eye</p>
-</blockquote>
+<p>(Note: the probability of sampling transition $P(i)$ has nothing to do with the probability to sample a transition(experience) in the replay buffer(sum tree), which is based on the transition’s priority $p_i$. So don’t be confused by it, the $P(i)$ is used to calculate the <code>Importance Sampling(IS) Weight</code>.)<br>where $p_i &gt; 0$ is the priority of transition $i$. The exponent α determines how much prioritization is used, with $\alpha = 0$ corresponding to the uniform case.</p>
 <blockquote>
-<p><code>achilles tendon(跟腱)</code>: At the back of the leg, connecting the calf(小腿肚) to the heel(足跟) bone </p>
+<p>proportional prioritization: $p_i = |\delta_i| + \epsilon$<br>rank-based prioritization: $p_i = \frac{1}{rank(i)}$ , where $rank(i)$ is the rank of transition $i$ sorted according to $\delta_i$.</p>
 </blockquote>
-<blockquote>
-<p><code>appendix(阑尾)</code>: A tube connected to a pouch called the cecum colon(盲肠)</p>
-</blockquote>
-<blockquote>
-<p><code>adrenal glands(肾上腺)</code>: Above the kidneys</p>
-</blockquote>
-<blockquote>
-<p><code>biceps(二头肌)</code>: Are muscles in the upper arm, between the shoulder and the elbow</p>
-</blockquote>
-<blockquote>
-<p><code>triceps(三头肌)</code>: Are muscles on the back of the upper arm</p>
-</blockquote>
-<blockquote>
-<p><code>quadriceps(四头肌)</code>: Are a muscles group on the front of the thighs(大腿)</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/07/Anatomy/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+<ul>
+<li><strong>Importance Sampling(IS)</strong><br>Because prioritized replay introduces a bias that changes this distribution uncontrollably. This can be corrected by using importance-sampling (IS) weights:</li>
+</ul>
+<p>that fully compensate for the non-uniform probabilities $P(i)$ if $\beta = 1$. These weights can be folded into the Q-learning update by using $w_i\delta_i$ instead of $\delta_i$. For stability reasons, we always normalize weights by $1 / max_i w_i$ so that they only scale the update downwards.<br><code>IS</code> is annealed from $\beta_0$ to $1$, which means its affect is felt more strongly at the end of the stochastic process; this is because the unbiased nature of the updates in RL is most important near convergence.</p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/03_priority_replay.py" target="_blank" rel="noopener">Do Double DQN with prioritized experience replay from scratch(basic version)</a></p>
+<h3 id="5-gt-Dueling-network-architecture"><a href="#5-gt-Dueling-network-architecture" class="headerlink" title="5 &gt;Dueling network architecture"></a><strong>5 &gt;Dueling network architecture</strong></h3><p> <strong> <em>Dueling network architecture.</em></strong> Generalize across actions by separately representing state values and action advantages.<br>The dueling network is a neural network architecture designed for value based RL which has a $|A|$ dimension output that Q-value for each action. It features two streams of computation, the <strong>state value</strong> and <strong>action advantage</strong> streams, sharing a convolutional encoder, and merged by a special aggregator layer.<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dueling_netarch.png" alt><br>The aggregator can be expressed as:</p>
+<p>where $\theta, \beta, \alpha$, respectively, the parameters of the shared convolutional encoder, value stream, and action advantage stream.<br> <strong>The details of dueling network architecture for Atari:</strong><br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dueling_details.png" alt><br>Since both the value and the advantage stream propagate gradients to the last convolutional layer in the backward pass, we rescale the combined gradient entering the last convolutional layer by $1/\sqrt{2}$. This simple heuristic mildly increases stability. In addition, we clip the gradients to have their norm less than or equal to $10$. </p>
+<p><strong>Other tricks:</strong></p>
+<ul>
+<li><strong><em>Human Starts:</em></strong> Using 100 starting points sampled from a human expert’s trajectory.</li>
+<li><strong><em>Saliency maps:</em></strong> To better understand the roles of the value and the advantage streams.</li>
+</ul>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/04_dueling.py" target="_blank" rel="noopener">Do Dueliing Double DQN with prioritized experience replay from scratch(basic version)</a></p>
+<h3 id="6-gt-Multi-step-bootstrapping"><a href="#6-gt-Multi-step-bootstrapping" class="headerlink" title="6 &gt;Multi-step bootstrapping"></a><strong>6 &gt;Multi-step bootstrapping</strong></h3><p> <strong> <em>Multi-step bootstrap targets.</em></strong> Shift the bias-variance tradeoff and helps to propagate newly observed rewards faster to earlier visited states.<br>The best methods are often intermediate between the two extremes. <em>n-step TD learning method</em> lies between <strong>Monte Carlo</strong> and <strong>one-step TD methods</strong>.</p>
+<ul>
+<li><p>Monte Carlo methods perform an update for each state based on the entire sequence of observed rewards from that state until the end of the episode</p>
+</li>
+<li><p>The update of one-step TD methods(also called TD(0) methods), on the other hand, is based on just the one next reward, bootstrapping from the value of the state one step later as a proxy for the remaining rewards.</p>
+</li>
+<li><p>Now, n-step TD methods perform a tradeoff that update each state after <strong>n</strong> time steps, based on <strong>n</strong> next rewards, bootstrapping from the value of the state <strong>n</strong> step later as a proxy for the remaining rewards.</p>
+</li>
+</ul>
+<p>We know that Q-learning is a kind of TD learning. All the implementations before are based on TD(0) learing updating. Now, we are going to implement a n-step deep Q-learning method, the most different part is how to calculate the <em>target</em> Q value.<br>In one-step DQN:</p>
+<p>In one-step Double DQN, the loss is :</p>
+<p>In multi-step Double DQN, the loss is :</p>
+<p>(The algorithm looks easy to implement and stability guaranteed, but it brings much fluctuation and seems learning rate sensitive when used to train the agent to play CartPole-v0. So if you check this model, you maybe should pay a little bit more attention to it.)<br><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/05_multistep_td.py" target="_blank" rel="noopener">Do Multi-Step Dueliing Double DQN with prioritized experience replay from scratch(basic version)</a></p>
+<h3 id="7-gt-Distributional-Q-learning"><a href="#7-gt-Distributional-Q-learning" class="headerlink" title="7 &gt;Distributional Q-learning"></a><strong>7 &gt;Distributional Q-learning</strong></h3><p> <strong> <em>Distributional Q-learning.</em></strong> Learn a categorical distribution of discounted returns, instead of its expectation.<br>In Q learning:</p>
+<p>Where $Q(s, a)$ is the expection of the discounted returns.<br>Now, in distributional rl, instead of calculating the expection, we work directly with the full distribution of the returns of state $s$, action $a$ and following the current policy $\pi$, denoted by a random variable $Z(s, a)$.<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_rl.png" alt><br>Where $z_i - z_{i-1} = \Delta z = (V_{min} - V_{max}) / N$, we assume that the range of the return $z_i$ is from $V_{min}$ to $V_{max}$, $N$ is the number of atoms, $(z_i, p_i(s, a))$. Now, for each state-action pair $(s, a)$, there is a corresponding distribution of its returns, not a expection value. We calculate the action value of $(s, a)$ as $Q(s, a) = E[Z(s, a)]$. Even through we still use the expected value, what we’re going to optimize is the distribution:</p>
+<p>The difference is obverse that, we still use a deep neural network to do function approximation, in traditional DQN, our output for each input state $s$ is a $|A|$-dim vector, each element corresponds to an action value $q(s, a)$, but now, the output for each input state $s$ is a $|A|*N$-dim matrix, that each row is a $N$-dim vector represents the return distribution of $Z(s, a)$, then we calculate the action-value of $(s, a)$ through: </p>
+<p> <strong> <em>KL Divergence</em></strong><br>Now, we need to minimize the distance between the current distribution and the target distribution.<br> <strong> <em>Note:</em></strong> the following content are mainly from that great blog: <a href="https://mtomassoli.github.io/2017/12/08/distributional_rl/#kl-divergence" target="_blank" rel="noopener">https://mtomassoli.github.io/2017/12/08/distributional_rl/#kl-divergence</a><br>If $p$ and $q$ are two distributions with same support (i.e. their $pdfs$ are non-zero at the same points), then their KL divergence is defined as follows:</p>
+<p>“Now say we’re using DQN and extract $(s, a, r, s′)$ from the replay buffer. A “sample of the target distribution” is $r + \gamma Z_{\bar{\theta}}(s′, a^*)$. We want to move $Z_{\theta}(s, a)$ towards this target (by keeping the target fixed).”<br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_learn.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_projected.png" alt></p>
+<p>Then, their KL loss is:</p>
+<p>The gradient of the KL loss is:</p>
+<p>So, we can just use the <em>cross-entropy</em> :</p>
+<p>as the loss function.</p>
+<p><strong><em>The total algorithm is as follows:</em></strong><br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/p2.png" alt></p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/06_distributional_rl.py" target="_blank" rel="noopener">Do Distributional RL Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)</a><br>I feel really sorry to say that actually, this is a failed implementation, just as a reference, but I still hope it to be helpful to someone, and I promise I will try my best to fix it. Further more, I really hope some good guy can check my code, find the wrong place, even as a contributor to make it work together, thanks a lot.</p>
+<h3 id="8-gt-Noisy-DQN"><a href="#8-gt-Noisy-DQN" class="headerlink" title="8 &gt;Noisy DQN"></a><strong>8 &gt;Noisy DQN</strong></h3><p> <strong> <em>Noisy DQN.</em></strong> Use stochastic network layers for exploration.<br>By now, the exploration method we used are all e-greedy methods, but in some games such as Montezuma’s Revenge, where many actions must be executed to collect the first reward. the limitations of exploring using ?-greedy policies are clear. Noisy Nets propose a noisy linear layer that combines a deterministic and noisy stream.<br>A normal linear layer with $p$ inputs and $q$ outputs, represented by:</p>
+<p>A noisy linear layer now is:</p>
+<p>Where where $\mu^w + \sigma^w \odot \epsilon^w$ and $\mu^b + \sigma^b \odot \epsilon^b$ replace $w$ and $b$, respectively. The parameters $\mu^w \in R^{q \times p}$, $\mu^b \in R^q$, $\sigma^w \in R^{q\times p}$ and $\sigma^b \in R^q$ are learnable whereas $\epsilon^w \in R^{q\times p}$ and $\epsilon^b \in R^q$ are noise random variables. There are two kinds of Gaussian Noise:</p>
+<ul>
+<li><p><strong>Independent Gaussian Noise:</strong><br>The noise applied to each weight and bias is independent, where each entry $\epsilon^w_{i,j}$ (respectively each entry $\epsilon^b_j$) of the random matrix $\epsilon^w$ (respectively of the random vector $\epsilon^b$ ) is drawn from a unit Gaussian distribution. This means that for each noisy linear layer, there are $pq + q$ noise variables (for p inputs to the layer and q outputs).</p>
+</li>
+<li><p><strong>Factorised Gaussian Noise:</strong><br>By factorising $\epsilon^w_{i,j}$, we can use $p$ unit Gaussian variables $\epsilon_i$ for noise of the inputs and and $q$ unit Gaussian variables $\epsilon_j$ for noise of the outputs (thus $p + q$ unit Gaussian variables in total). Each $\epsilon^w_{i,j}$ and $\epsilon^b_j$ can then be written as:</p>
+</li>
+</ul>
+<p>where $f$ is a real-valued function. In our experiments we used $f(x) = sgn(x) \sqrt{|x|}$. Note that<br>for the bias $\epsilon^b_j$ we could have set $f(x) = x$, but we decided to keep the same output noise for weights and biases.</p>
+<p><strong><em>The total algorithm is as follows:</em></strong><br><img src="https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/noisy_net_algorithm.png" alt></p>
+<p><a href="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/07_noisynet.py" target="_blank" rel="noopener">Do Noisy Network Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)</a></p>
+<h3 id="9-gt-Rainbow"><a href="#9-gt-Rainbow" class="headerlink" title="9 &gt;Rainbow"></a><strong>9 &gt;Rainbow</strong></h3><p>Finally, we get the integrated agent: Rainbow. It used a <strong>multi-step</strong> distributional loss:</p>
+<p>Where $\Phi_z$ is the projection onto $z$, and the target distribution $d_t^{(n)}$ is:</p>
+<p>Using <strong>double Q-learning</strong> gets the greedy action $a^*<em>{t+n}$ of $S</em>{t+n}$ through <em>online network</em> , and evaluates such action using the <em>target network</em>.</p>
+<p>In Rainbow, it uses the KL loss to <strong>prioritize transitions</strong> instead of using the absolute TD error, maybe more robust to noisy stochastic environments because the loss can continue to decrease even when the returns are not deterministic.</p>
+<p>The network architecture is a <strong>dueling network architecture</strong> adapted for use with return <strong>distributions</strong>. The network has a shared representation $f_{\xi}(s)$, which is then fed into a value stream $v_{\eta}$ with $N_{atoms}$ outputs, and into an advantage stream $a_{\xi}$ with $N_{atoms} \times N_{actions}$ outputs, where $a_{\xi}^i(f_{\xi}(s),a)$ will denote the output corresponding to atom $i$ and action $a$. For each atom $z^i$, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalised parametric distributions used to estimate the returns’ distributions:</p>
+<p>where $\phi = f_{\xi}(s)$, and $\bar{a}<em>{\Phi}^i(s) = \frac{1}{N</em>{actions}}\sum_{a’}a_{\Phi}^i(\phi, a’)$</p>
+<p>Then replace all linear layers with their noisy equivalent(factorised Gaussian noise version). </p>
+<p>Done, and thanks for reading, I hope it could be helpful to someone.<br>Any suggestion is more than welcome, thanks again.</p>
+<h3 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a><em>REFERENCES</em></h3><p> <strong>Blogs:</strong><br><a href="https://towardsdatascience.com/deep-double-q-learning-7fca410b193a" target="_blank" rel="noopener">1.Self Learning AI-Agents III:Deep (Double) Q-Learning(Blog)</a><br><a href="https://blog.csdn.net/qq_30615903/article/details/80744083" target="_blank" rel="noopener">2.【强化学习】Deep Q Network(DQN)算法详解(Bolg)</a><br><a href="https://www.freecodecamp.org/news/improvements-in-deep-q-learning-dueling-double-dqn-prioritized-experience-replay-and-fixed-58b130cc5682/" target="_blank" rel="noopener">3.Improvements in Deep Q Learning: Dueling Double DQN, Prioritized Experience Replay, and fixed…(Blog)</a><br><a href="https://jaromiru.com/2016/11/07/lets-make-a-dqn-double-learning-and-prioritized-experience-replay/" target="_blank" rel="noopener">4.Let’s make a DQN: Double Learning and Prioritized Experience Replay(Blog)</a><br><a href="https://mtomassoli.github.io/2017/12/08/distributional_rl/#ref-2017arXiv171010044D" target="_blank" rel="noopener">5.Distributional RL</a></p>
+<p><strong>Books:</strong><br><a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener">1.Reinforcement Learning: An Introduction (Chapter 6, 7, 9)</a></p>
+<p><strong>Papers:</strong><br><a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewFile/17204/16680" target="_blank" rel="noopener">1.Rainbow: Combining Improvements in Deep Reinforcement Learning</a><br><a href="https://daiwk.github.io/assets/dqn.pdf" target="_blank" rel="noopener">2.Human-level control through deep reinforcement learning</a><br><a href="https://arxiv.org/pdf/1711.07478.pdf" target="_blank" rel="noopener">3.Implementing the Deep Q-Network</a><br><a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12389/11847" target="_blank" rel="noopener">4.Deep Reinforcement Learning with Double Q-learning</a><br><a href="https://arxiv.org/pdf/1511.05952.pdf" target="_blank" rel="noopener">5.Prioritized Experience Replay</a><br><a href="https://arxiv.org/pdf/1511.06581.pdf" target="_blank" rel="noopener">6.Dueling Network Architectures for Deep Reinforcement Learning</a><br><a href="https://arxiv.org/pdf/1901.07510.pdf" target="_blank" rel="noopener">7.Understanding Multi-Step Deep Reinforcement Learning: A Systematic Study of the DQN Target</a><br><a href="https://arxiv.org/pdf/1803.00933.pdf" target="_blank" rel="noopener">8.Distributed Prioritized Experience Replay</a><br><a href="https://arxiv.org/pdf/1707.06887.pdf" target="_blank" rel="noopener">9.A Distributional Perspective on Reinforcement Learning</a><br><a href="https://arxiv.org/pdf/1706.10295.pdf" target="_blank" rel="noopener">10.Noisy Networks for Exploration</a></p>
+<p><strong>GitHub Repos:</strong><br><a href="https://github.com/inoryy/tensorflow2-deep-reinforcement-learning" target="_blank" rel="noopener">inoryy/tensorflow2-deep-reinforcement-learning for the whole TF2 Network Architecture</a><br><a href="https://github.com/germain-hug/Deep-RL-Keras/blob/master/DDQN/agent.py#L49" target="_blank" rel="noopener">keras-rl for Deuling Network</a><br><a href="https://github.com/jaromiru/AI-blog/blob/master/SumTree.py" target="_blank" rel="noopener">jaromiru/AI-blog for Prioritized Experience Replay</a><br><a href="https://github.com/medipixel/rl_algorithms/" target="_blank" rel="noopener">rl_algorithms for Multi-Step TD Learning</a><br><a href="https://github.com/Kaixhin/Rainbow/blob/master/model.py#L10" target="_blank" rel="noopener">Kaixhin/Rainbow for Distribution RL &amp; Noisy Net</a><br><a href="https://github.com/keras-team/keras/blob/master/keras/layers/core.py#L796" target="_blank" rel="noopener">keras for Noisy Net</a><br><a href="https://github.com/google/dopamine/blob/master/dopamine/agents/rainbow/rainbow_agent.py" target="_blank" rel="noopener">dopamine for Rainbow</a></p>
+
+          
         
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/05/Markdown-Syntax/" itemprop="url">
-                  Markdown Syntax
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-05T19:02:24+08:00" content="2017-12-05">
-              2017-12-05
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tutorial/" itemprop="url" rel="index">
-                    <span itemprop="name">Tutorial</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/05/Markdown-Syntax/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/05/Markdown-Syntax/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Markdown的常用语法"><a href="#Markdown的常用语法" class="headerlink" title="Markdown的常用语法"></a>Markdown的常用语法</h1><blockquote>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> Markdown 是一种轻量级标记语言，它用简洁的语法代替排版，使我们专心于码字。它的目标是实现易读易写，成为一种适用于网络的书写语言。同时，Markdown支持嵌入html标签。<br><u><strong>注意</strong>：Markdown使用#、+、*、&gt;等符号来标记， 符号后面必须跟上 至少1个 空格才有效！</u>  </p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/05/Markdown-Syntax/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/02/Python-Learning/" itemprop="url">
-                  Python Learning
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-10-02T18:21:05+08:00" content="2017-10-02">
-              2017-10-02
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/02/Python-Learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/02/Python-Learning/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Numpy-Matrix"><a href="#Numpy-Matrix" class="headerlink" title="Numpy Matrix"></a>Numpy Matrix</h2><blockquote>
-<p><strong>Create a matrix</strong><br>  <code>Way 1</code><br>  <code>&gt;&gt;&gt; a = np.matrix(&#39;1 2 3; 3 4 5; 5 6 7&#39;)</code><br>  <code>Way 2</code><br>  <code>&gt;&gt;&gt; b = np.array([[1, 5], [3, 2]])</code><br>  <code>&gt;&gt;&gt; x = np.matirx(b)</code></p>
-</blockquote>
-<blockquote>
-<p><strong>Delete a row/column in a matrix: x_mat</strong><br>  <code>&gt;&gt;&gt; x_mat = np.delete(x_mat, del_row/column_number, axis = 0/1)</code><br>  <code># axis = 0 --- row dim  ///   axis = 1 --- column dim</code><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/02/Python-Learning/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </p></blockquote></div>
 
     <div>
       
@@ -872,7 +920,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -911,7 +959,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -928,7 +976,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
